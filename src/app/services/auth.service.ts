@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { AuthRequest } from '../models/auth-request.model';
 import { AuthResponse } from '../models/auth-response.model';
 import { Observable } from 'rxjs';
+import { ApiResponse } from '../models/api.response';
 
 
 @Injectable({
@@ -17,12 +18,16 @@ export class AuthService {
     private router: Router
   ) { }
 
-  login(request: AuthRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/login`, request);
+  login(request: AuthRequest): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${this.baseUrl}/login`, request);
   }
 
   register(request: AuthRequest): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, request);
+  }
+
+  getMyProfile(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/me`);
   }
 
   getToken(): string | null {
@@ -38,6 +43,7 @@ export class AuthService {
   logout() {
     if (typeof window === 'undefined') return; // 👈 chống lỗi SSR
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 

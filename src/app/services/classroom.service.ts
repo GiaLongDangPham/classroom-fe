@@ -47,4 +47,9 @@ export class ClassroomService {
   leaveClass(classId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/leave/${classId}`);
   }
+
+  // GET /classrooms/explore
+  getExploreClasses(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/explore`);
+  }
 }

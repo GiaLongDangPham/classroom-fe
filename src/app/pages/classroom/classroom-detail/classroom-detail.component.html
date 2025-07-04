@@ -1,1 +1,21 @@
-<p>classroom-detail works!</p>
+<div class="min-h-screen bg-gray-50 p-6" *ngIf="!loading">
+  <!-- Nút quay lại -->
+  <button
+    (click)="goBack()"
+    class="mb-4 px-4 py-2 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition"
+  >
+    ← Quay lại danh sách lớp
+  </button>
+  
+  <h2 class="text-3xl font-bold text-blue-600 mb-2">{{ classroom.name }}</h2>
+  <p class="text-gray-700 text-lg mb-4">{{ classroom.description }}</p>
+  <p class="text-gray-600 mb-2">Người tạo: <strong>{{ classroom.createdBy }}</strong></p>
+  <p class="text-gray-600 mb-6">Mã lớp: <strong>{{ classroom.joinCode }}</strong></p>
+
+  <button
+    (click)="leaveOrDelete()"
+    class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition"
+  >
+    {{ isCreator ? 'Xoá lớp học' : 'Rời lớp học' }}
+  </button>
+</div>

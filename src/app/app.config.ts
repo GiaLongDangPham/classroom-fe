@@ -18,6 +18,8 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([AuthInterceptor])
     ),
     provideAnimations(),
-    provideToastr()
+    provideToastr({
+      positionClass: 'toast-bottom-right'  // hoặc 'toast-top-center'
+    })
   ]
 };

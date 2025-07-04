@@ -1,1 +1,21 @@
-<p>header works!</p>
+<!-- header.component.html -->
+<header class="bg-white border-b shadow-sm p-4 flex justify-between items-center ">
+  <h1 class="text-xl font-bold text-blue-600">Classroom</h1>
+
+  <div class="flex items-center gap-4">
+    <button
+      class="text-gray-700 font-medium hover:underline"
+      (click)="getMyProfile()"
+      title="Trang cá nhân (chưa triển khai)"
+    >
+      {{ userFullName || 'Đang tải...' }}
+    </button>
+
+    <button
+      (click)="logout()"
+      class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition"
+    >
+      Đăng xuất
+    </button>
+  </div>
+</header>

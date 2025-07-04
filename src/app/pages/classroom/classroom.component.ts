@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ClassroomListComponent } from "./classroom-list/classroom-list.component";
+import { HeaderComponent } from "../../layout/header/header.component";
 @Component({
   selector: 'app-classroom',
   standalone: true,
   imports: [
     CommonModule,
     RouterModule,
-    ClassroomListComponent
+    ClassroomListComponent,
+    HeaderComponent
 ],
   templateUrl: './classroom.component.html',
   styleUrl: './classroom.component.scss'

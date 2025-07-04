@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'ngx-toastr/toastr';
+
+.toast-success {
+  @apply bg-green-500 text-white rounded-lg shadow-lg px-4 py-2;
+}
+.toast-error {
+  @apply bg-red-500 text-white rounded-lg shadow-lg px-4 py-2;
+}

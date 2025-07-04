@@ -26,14 +26,17 @@ export class AuthService {
   }
 
   getToken(): string | null {
+    if (typeof window === 'undefined') return null; // 👈 chống lỗi SSR
     return localStorage.getItem('token');
   }
 
   setToken(token: string) {
+    if (typeof window === 'undefined') return; // 👈 chống lỗi SSR
     localStorage.setItem('token', token);
   }
 
   logout() {
+    if (typeof window === 'undefined') return; // 👈 chống lỗi SSR
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }

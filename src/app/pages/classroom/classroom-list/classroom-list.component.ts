@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
+import { ClassroomService } from '../../../services/classroom.service';
+import { AuthService } from '../../../services/auth.service';
 @Component({
   selector: 'app-classroom-list',
   standalone: true,
@@ -20,17 +21,21 @@ export class ClassroomListComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private classroomService: ClassroomService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>('/api/classroom/my').subscribe({
-      next: data => {
-        this.classrooms = data;
+    this.classroomService.getMyClasses().subscribe({
+      next: (response: any) => {
+        debugger
+        this.classrooms = response.data;
         this.loading = false;
       },
-      error: err => {
-        // console.error('Lỗi lấy lớp học:', err);
+      error: (err) => {
+        debugger
+        console.error('Lỗi lấy lớp học:', err);
         this.toastr.error('Không thể tải danh sách lớp học');
         this.loading = false;
       }
@@ -39,5 +44,10 @@ export class ClassroomListComponent implements OnInit {
 
   goToClassroom(id: number) {
     this.router.navigate(['/classroom', id]);
+  }
+
+  logout() {
+    this.authService.logout();
+    // window.location.href = '/login'; // Redirect to login page
   }
 }

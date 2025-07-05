@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { ClassroomListComponent } from "./classroom-list/classroom-list.component";
-import { HeaderComponent } from "../../layout/header/header.component";
 @Component({
   selector: 'app-classroom',
   standalone: true,
@@ -11,14 +9,13 @@ import { HeaderComponent } from "../../layout/header/header.component";
     CommonModule,
     RouterModule,
     ClassroomListComponent,
-    HeaderComponent
 ],
   templateUrl: './classroom.component.html',
   styleUrl: './classroom.component.scss'
 })
 export class ClassroomComponent {
 
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
   
 }

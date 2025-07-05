@@ -6,15 +6,19 @@ import { ClassroomService } from '../../../services/classroom.service';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../../layout/header/header.component';
 import { ApiResponse } from '../../../models/api.response';
+import { AuthService } from '../../../services/auth.service';
+import { UserResponse } from '../../../models/user.response';
+import { SidebarComponent } from "../../../layout/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-classroom-list',
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
-    HeaderComponent
-  ],
+    HeaderComponent,
+    SidebarComponent
+],
   templateUrl: './classroom-list.component.html',
   styleUrl: './classroom-list.component.scss'
 })
@@ -23,11 +27,13 @@ export class ClassroomListComponent implements OnInit {
   suggestedClasses: any[] = [];
   loading = true;
   joinCode = '';
+  
 
   constructor(
     private router: Router,
     private toastr: ToastrService,
     private classroomService: ClassroomService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +57,8 @@ export class ClassroomListComponent implements OnInit {
         this.loading = false;
       }
     });
+
+    
   }
 
   goToClassroom(id: number) {
@@ -78,5 +86,9 @@ export class ClassroomListComponent implements OnInit {
   joinSuggestedClass(code: string): void {
     this.joinCode = code;
     this.onJoinClass();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

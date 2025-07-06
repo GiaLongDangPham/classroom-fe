@@ -3,34 +3,49 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClassroomService } from '../../../services/classroom.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { PostComponent } from './post/post.component';
+import { PostResponse } from '../../../models/response/post.response';
+import { PostService } from '../../../services/post.service';
+import { ApiResponse } from '../../../models/api.response';
+import { ClassroomResponse } from '../../../models/response/classroom.response';
+import { AvatarComponent } from "../../shared/avatar/avatar.component";
 
 @Component({
   selector: 'app-classroom-detail',
   standalone: true,
   imports: [
-    CommonModule
-  ],
+    CommonModule,
+    CreatePostComponent,
+    PostComponent,
+    AvatarComponent
+],
   templateUrl: './classroom-detail.component.html',
   styleUrl: './classroom-detail.component.scss'
 })
 export class ClassroomDetailComponent implements OnInit{
 
-  classroom: any;
+  classroom: ClassroomResponse = {};
   classroomId!: number;
   loading = true;
   isCreator = false;
+  posts: PostResponse[] = [];
+  defaultAvatar = '/assets/default-avatar.png';
+  visibleMembers:number = 2;
 
   constructor(
     private route: ActivatedRoute,
     private classroomService: ClassroomService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private postService: PostService,
   ) {}
 
   ngOnInit(): void {
     this.classroomId = Number(this.route.snapshot.paramMap.get('id'));
     this.classroomService.getClassDetail(this.classroomId).subscribe({
-      next: (res) => {
+      next: (res: ApiResponse) => {
+        debugger
         this.classroom = res.data;
         this.isCreator = res.data.isCreatedByCurrentUser; // backend nên gửi field này
         this.loading = false;
@@ -40,10 +55,28 @@ export class ClassroomDetailComponent implements OnInit{
         this.loading = false;
       }
     });
+
+    this.loadPosts();
+  }
+
+  loadPosts() {
+    this.postService.getPostsByClassId(this.classroomId).subscribe({
+      next: (res: ApiResponse) => {
+        this.posts = res.data;
+      },
+      error: () => {
+        debugger
+        this.toastr.error('Không thể tải bài viết');
+      }
+    });
   }
 
   goBack() {
     this.router.navigate(['/classroom']);
+  }
+
+  showMoreMembers() {
+    this.visibleMembers += 2;
   }
 
   leaveOrDelete() {

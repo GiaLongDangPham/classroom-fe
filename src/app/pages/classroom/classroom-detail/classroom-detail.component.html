@@ -6,16 +6,62 @@
   >
     ← Quay lại danh sách lớp
   </button>
-  
-  <h2 class="text-3xl font-bold text-blue-600 mb-2">{{ classroom.name }}</h2>
-  <p class="text-gray-700 text-lg mb-4">{{ classroom.description }}</p>
-  <p class="text-gray-600 mb-2">Người tạo: <strong>{{ classroom.createdBy }}</strong></p>
-  <p class="text-gray-600 mb-6">Mã lớp: <strong>{{ classroom.joinCode }}</strong></p>
 
-  <button
-    (click)="leaveOrDelete()"
-    class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition"
-  >
-    {{ isCreator ? 'Xoá lớp học' : 'Rời lớp học' }}
-  </button>
+  <!-- Thông tin lớp -->
+  <div class="bg-white p-6 rounded-xl shadow mb-6">
+    <h2 class="text-3xl font-bold text-blue-600 mb-2">{{ classroom.name }}</h2>
+    <p class="text-gray-700 text-lg mb-4">{{ classroom.description }}</p>
+    <p class="text-gray-600 mb-2">Người tạo: <strong>{{ classroom.createdBy }}</strong></p>
+    <p class="text-gray-600 mb-4">Mã lớp: <strong>{{ classroom.joinCode }}</strong></p>
+
+    <button
+      (click)="leaveOrDelete()"
+      class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition"
+    >
+      {{ isCreator ? 'Xoá lớp học' : 'Rời lớp học' }}
+    </button>
+
+    <!-- Danh sách thành viên -->
+    <div class="mt-6" *ngIf="classroom.members && classroom.members.length > 0">
+      <h3 class="text-2xl font-semibold text-gray-800 mb-3">Thành viên trong lớp ({{ classroom.members.length }})</h3>
+
+      <div class="space-y-2">
+        <div *ngFor="let member of classroom.members | slice:0:visibleMembers" class="flex items-center justify-between bg-gray-100 p-3 rounded-xl">
+          <!--Avatar-->
+          <app-avatar [user]="member" [isAllowUpload]="false"></app-avatar>
+
+          <!--Thông tin cá nhân-->
+          <div>
+            <p class="font-medium text-gray-900">{{ member.fullName }}</p>
+            <p class="text-sm text-gray-600">{{ member.email }}</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-sm font-semibold"
+                [ngClass]="{
+                  'bg-blue-100 text-blue-800': member.roleInClass === 'TEACHER',
+                  'bg-green-100 text-green-800': member.roleInClass === 'STUDENT'
+                }">
+            {{ member.roleInClass === 'TEACHER' ? 'Giáo viên' : 'Học sinh' }}
+          </span>
+        </div>
+        
+        <button *ngIf="classroom.members && visibleMembers < classroom.members.length"
+                (click)="showMoreMembers()"
+                class="mt-2 text-blue-600 underline text-sm">
+          Hiển thị thêm
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Form tạo bài viết -->
+  <div class="bg-white p-6 rounded-xl shadow mb-6">
+    <app-create-post [classroomId]="classroomId"></app-create-post>
+  </div>
+
+  <!-- Danh sách bài viết -->
+  <div class="space-y-4">
+    <h3 class="text-2xl font-semibold text-gray-800 mb-2">Bài viết trong lớp</h3>
+    <app-post *ngFor="let post of posts" [post]="post"></app-post>
+  </div>
 </div>

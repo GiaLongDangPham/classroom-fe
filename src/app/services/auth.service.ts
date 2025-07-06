@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { AuthRequest } from '../models/auth-request.model';
+import { AuthRequest } from '../models/request/auth-request.model';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../models/api.response';
 

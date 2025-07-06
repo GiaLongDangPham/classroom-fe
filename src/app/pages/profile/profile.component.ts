@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { ApiResponse } from '../../models/api.response';
-import { UserResponse } from '../../models/user.response';
+import { UserResponse } from '../../models/response/user.response';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AvatarComponent } from '../shared/avatar/avatar.component';
@@ -21,7 +21,6 @@ import { AvatarComponent } from '../shared/avatar/avatar.component';
 export class ProfileComponent {
 
   user: UserResponse | null = null;
-  avatarUrl?: string;
 
   loading = true;
 
@@ -127,35 +126,5 @@ export class ProfileComponent {
       }
     });
   }
-
-
-  // onAvatarSelected(event: Event) {
-  //   const file = (event.target as HTMLInputElement).files?.[0];
-  //   if (!file) return;
-
-  //   const formData = new FormData();
-  //   formData.append('file', file);
-  //   debugger
-  //   this.userService.uploadAvatar(formData).subscribe({
-  //     next: (avatarUrl: string) => {
-  //       debugger
-  //       if (!this.user) return;
-
-  //       this.user.avatarUrl = avatarUrl;
-  //       this.userService.updateAvatar({ avatarUrl }).subscribe({
-  //         next: () => {
-  //           localStorage.setItem('user', JSON.stringify(this.user));
-  //           this.toast.success('Cập nhật ảnh đại diện thành công!');
-  //         },
-  //         error: (err) => this.toast.error('Cập nhật thất bại')
-  //       });
-  //     },
-  //     error: (err) => {
-  //       debugger
-  //       this.toast.error('Upload ảnh thất bại')
-  //     }
-  //   });
-  // }
-  
 
 }

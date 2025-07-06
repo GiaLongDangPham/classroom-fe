@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../models/api.response';
-import { UserResponse } from '../models/user.response';
+import { UserResponse } from '../models/response/user.response';
 
 @Injectable({
   providedIn: 'root'

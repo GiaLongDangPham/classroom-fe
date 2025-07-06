@@ -6,8 +6,8 @@ import { ClassroomService } from '../../../services/classroom.service';
 import { FormsModule } from '@angular/forms';
 import { ApiResponse } from '../../../models/api.response';
 import { AuthService } from '../../../services/auth.service';
-import { UserResponse } from '../../../models/user.response';
-import { ClassroomRequest } from '../../../models/classroom.model';
+import { UserResponse } from '../../../models/response/user.response';
+import { ClassroomRequest } from '../../../models/request/classroom.model';
 
 @Component({
   selector: 'app-classroom-list',

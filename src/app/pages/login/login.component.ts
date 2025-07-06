@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { AuthRequest } from '../../models/auth-request.model';
+import { AuthRequest } from '../../models/request/auth-request.model';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';

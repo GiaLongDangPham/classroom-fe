@@ -1,12 +1,9 @@
 <label class="relative cursor-pointer">
-  <div (click)="onUploadAvatar()">
+  <div>
     <img
-      [src]="avatarUrl || defaultAvatar"
+      [src]="user?.avatarUrl || defaultAvatar"
       alt="avatar"
-      class="w-24 h-24 rounded-full border-2 border-blue-500 object-cover"
-      
+      [class]="avatarClasses"
     />
   </div>
-  <!-- <input type="file" hidden (change)="onAvatarSelected($event)" accept="image/*" /> -->
-  <div class="absolute bottom-0 right-0 bg-blue-600 text-white p-1 rounded-full text-xs">✎</div>
 </label>

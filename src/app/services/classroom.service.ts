@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { ClassroomRequest } from '../models/classroom.model';
+import { ClassroomRequest } from '../models/request/classroom.model';
+import { ApiResponse } from '../models/api.response';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class ClassroomService {
   }
 
   // GET /:id
-  getClassDetail(id: number): Observable<any> {
+  getClassDetail(id: number): Observable<ApiResponse> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 

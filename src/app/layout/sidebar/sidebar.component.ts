@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserResponse } from '../../models/user.response';
+import { UserResponse } from '../../models/response/user.response';
 import { AuthService } from '../../services/auth.service';
 import { ApiResponse } from '../../models/api.response';
 import { Router } from '@angular/router';

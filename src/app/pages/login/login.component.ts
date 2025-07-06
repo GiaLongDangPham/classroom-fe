@@ -37,18 +37,18 @@ export class LoginComponent {
   ) {}
 
   ngOnInit() {
-    // localStorage.clear(); // Clear local storage on init
   }
 
   onSubmit() {
-    // if (this.form.invalid) return;
-
     this.loading = true;
+
     const { username, password } = this.form.value;
+
     const loginDTO: AuthRequest = {
       username: username?.trim(),
       password: password?.trim()
     };
+
     if (!username || !password) {
       this.errorMessage = 'Vui lòng nhập đầy đủ thông tin';
       this.loading = false;
@@ -57,30 +57,24 @@ export class LoginComponent {
 
     this.authService.login(loginDTO).subscribe({
       next: (response: ApiResponse) => {
-        debugger
         this.loading = false;
         this.authService.setToken(response.data.token);
 
-        this.userService.getUserDetail(response.data.token).subscribe({
-          next: (user: any) => {  
-            if(user == null || !user) {
-              return;
-            }
-            const userResponseJSON = JSON.stringify(user);  
+        this.authService.getMyProfile().subscribe({
+          next: (res: ApiResponse) => {  
+            const user = res.data;
+            if(!user) return;
+
             // Save the JSON string to local storage with a key (e.g., "userResponse")
-            localStorage.setItem('user', userResponseJSON);
+            this.userService.saveToLocalStorage(user);
+            this.toastr.success('Đăng nhập thành công!');
+            this.router.navigate(['/classroom']);
           },
-          complete: () => {
-            debugger;
-          },
-          error: (error: HttpErrorResponse) => {
-            debugger;
-            console.error(error?.error?.message ?? '');
+          error: (error) => {
+            this.loading = false;
+            this.toastr.error('Không lấy được thông tin người dùng');
           } 
         })
-
-        this.router.navigate(['/classroom']);
-        this.toastr.success('Đăng nhập thành công!');
       },
       error: () => {
         debugger

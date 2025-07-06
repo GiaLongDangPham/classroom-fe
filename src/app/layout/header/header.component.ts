@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     setTimeout(() => {
       const userResponseJSON = localStorage.getItem('user'); 
       const userResponse = JSON.parse(userResponseJSON!);  
-      this.userFullName = `${userResponse.firstName} ${userResponse.lastName}`;
+      this.userFullName = `${userResponse?.firstName} ${userResponse?.lastName}`;
     }, 100);
   }
 

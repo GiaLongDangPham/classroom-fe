@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { ApiResponse } from '../models/api.response';
+import { UserResponse } from '../models/user.response';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +19,65 @@ export class UserService {
       private router: Router
     ) { }
 
-  getUserDetail(token: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl + "/details", {
+  updateProfile(data: {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+  }, id?: Number): Observable<ApiResponse> {
+    return this.http.put<any>(`${this.baseUrl}/update/${id}`, data, {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        'Content-Type': 'application/json'
       })
-    })
+    });
+  }
+
+  changePassword(data: {
+    oldPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+  }, id?: Number): Observable<ApiResponse> {
+    return this.http.put<any>(`${this.baseUrl}/change-password/${id}`, data);
+  }
+
+  saveToLocalStorage(user: UserResponse) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  getAvatarUrl(filename: string): string {
+    if (!filename) {
+      return '/assets/default-avatar.png'; // Default avatar
+    }
+    
+    // Debug logging
+    console.log('🖼️ Getting avatar URL for:', filename);
+    console.log('🔗 Environment API base:', environment.apiBaseUrl);
+    
+    // Tạo URL trực tiếp, không dùng replace
+    const baseUrl = 'http://localhost:8080'; // Hardcode để test
+    const avatarUrl = `${baseUrl}/images/avatars/${filename}`;
+    
+    console.log('🔗 Generated avatar URL:', avatarUrl);
+    return avatarUrl;
+  }
+
+  // Method để test avatar có accessible không
+  testAvatarAccess(filename: string): Observable<any> {
+    const url = this.getAvatarUrl(filename);
+    console.log('🧪 Testing avatar access:', url);
+    
+    return this.http.get(url, { 
+      observe: 'response',
+      responseType: 'blob' 
+    });
+  }
+
+  getCurrentUser(): UserResponse | null {
+    const userStr = localStorage.getItem('user');
+    return userStr ? JSON.parse(userStr) : null;
+  }
+
+  uploadAvatar(formData: FormData): Observable<UserResponse> {
+    const url = this.baseUrl + '/avatar';
+    return this.http.post<UserResponse>(url, formData);
   }
 }

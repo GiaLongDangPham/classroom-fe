@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { AuthRequest } from '../models/auth-request.model';
-import { AuthResponse } from '../models/auth-response.model';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../models/api.response';
 
@@ -26,7 +25,7 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/register`, request);
   }
 
-  getMyProfile(): Observable<any> {
+  getMyProfile(): Observable<ApiResponse> {
     return this.http.get(`${this.baseUrl}/me`);
   }
 

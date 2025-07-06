@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClassroomService } from '../../../services/classroom.service';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from '../../../layout/header/header.component';
 import { ApiResponse } from '../../../models/api.response';
 import { AuthService } from '../../../services/auth.service';
 import { UserResponse } from '../../../models/user.response';
-import { SidebarComponent } from "../../../layout/sidebar/sidebar.component";
+import { ClassroomRequest } from '../../../models/classroom.model';
 
 @Component({
   selector: 'app-classroom-list',
@@ -16,8 +15,6 @@ import { SidebarComponent } from "../../../layout/sidebar/sidebar.component";
   imports: [
     CommonModule,
     FormsModule,
-    HeaderComponent,
-    SidebarComponent
 ],
   templateUrl: './classroom-list.component.html',
   styleUrl: './classroom-list.component.scss'
@@ -27,7 +24,11 @@ export class ClassroomListComponent implements OnInit {
   suggestedClasses: any[] = [];
   loading = true;
   joinCode = '';
-  
+  currentUser: UserResponse = {};
+  createdClass: ClassroomRequest = {
+    name: '',
+    description: ''
+  };
 
   constructor(
     private router: Router,
@@ -37,7 +38,11 @@ export class ClassroomListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const userResponseJSON = localStorage.getItem('user'); 
+    const userResponse = JSON.parse(userResponseJSON!);  
+    this.currentUser = userResponse || {}; // Trả về đối tượng rỗng nếu không có dữ liệu
     this.fetchMyClasses();
+
   }
 
   fetchMyClasses() {
@@ -79,6 +84,24 @@ export class ClassroomListComponent implements OnInit {
       },
       error: () => {
         this.toastr.error('Mã lớp không hợp lệ hoặc đã tham gia lớp này');
+      }
+    });
+  }
+
+  onCreateClass(): void {
+    debugger
+    if(this.currentUser.role !== 'TEACHER') {
+      this.toastr.error('Chỉ giáo viên mới có thể tạo lớp học');
+      return;
+    }
+    this.classroomService.createClass(this.createdClass).subscribe({
+      next: (response: ApiResponse) => {
+        this.toastr.success('Tạo lớp học thành công!');
+        this.fetchMyClasses();
+        this.createdClass = { name: '', description: '' }; // Reset form
+      },
+      error: (error) => {
+        this.toastr.error('Không thể tạo lớp học: ' + (error.error?.message || 'Lỗi không xác định'));
       }
     });
   }

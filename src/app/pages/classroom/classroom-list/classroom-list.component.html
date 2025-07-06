@@ -1,18 +1,40 @@
-<app-header></app-header>
-<div class="min-h-screen flex bg-gray-50 mt-16">
-  <!-- Sidebar trái -->
-  <app-sidebar></app-sidebar>
-
+<div class="min-h-screen flex bg-gray-50 mt-16 max-w-[700px] mx-auto" >
   <!-- Nội dung chính -->
-  <main class="flex-1 p-8 max-w-[900px] mx-auto">
-    <!-- Header -->
+  <main class="flex-1 p-8 ">
+    
+    <!-- Tạo lớp học -->
+    <div class="bg-white p-6 rounded-xl shadow mb-6">
+      <h3 class="text-lg font-semibold text-gray-800 mb-4">Tạo lớp học mới</h3>
+      <div class="grid md:grid-cols-3 gap-4">
+        <input
+          [(ngModel)]="createdClass.name" 
+          type="text"
+          placeholder="Tên lớp học"
+          class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          [(ngModel)]="createdClass.description" 
+          type="text"
+          placeholder="Mô tả lớp học"
+          class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          (click)="onCreateClass()"
+          class="w-full px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition"
+        >
+          Tạo lớp học
+        </button>
+      </div>
+    </div>
+
+    <!-- Danh sách lớp học -->
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-semibold text-gray-800">Lớp học của bạn</h2>
       <div class="flex gap-4">
         <input
           [(ngModel)]="joinCode"
           type="text"
-          placeholder="Nhập mã lớp..."
+          placeholder="Nhập mã lớp muốn vào..."
           class="px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button

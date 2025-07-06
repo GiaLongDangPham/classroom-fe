@@ -1,0 +1,95 @@
+<div class="min-h-screen bg-gray-50 p-8 mt-16 max-w-[700px] mx-auto">
+  <div class="max-w-3xl mx-auto bg-white shadow rounded-xl p-6">
+    <div class="flex items-center space-x-6 mb-6">
+      
+      
+      <!-- Avatar -->
+      <app-avatar 
+        [user]="user"
+        [avatarUrl]="user?.avatarUrl"
+        [isAllowUpload]="true"
+      ></app-avatar>
+
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800">
+          {{ user?.firstName }} {{ user?.lastName }}
+        </h2>
+        <p class="text-gray-500">{{ user?.email }}</p>
+        <span class="inline-block px-2 py-1 text-xs bg-blue-100 text-blue-600 rounded mt-1">
+          {{ user?.role }}
+        </span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="text-sm text-gray-500">Ngày tham gia</label>
+        <div class="text-gray-800 font-medium">{{ user?.createdAt | date: 'mediumDate' }}</div>
+      </div>
+    </div>
+
+    <div class="mt-6 flex gap-4">
+      <!-- Toggle Form -->
+      <button (click)="toggleEditForm()"
+        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition w-44">
+        {{ showEditForm ? 'Hủy' : 'Cập nhật thông tin' }}
+      </button>
+      <button (click)="toggleChangePasswordForm()"
+        class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition w-44">
+        {{ showChangePasswordForm ? 'Hủy' : 'Cập nhật mật khẩu' }}
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Form cập nhật thông tin-->
+  <div *ngIf="showEditForm" class="mt-6 space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="text-sm text-gray-600">Họ</label>
+        <input [(ngModel)]="editData.firstName" class="w-full px-4 py-2 border rounded" type="text" />
+      </div>
+      <div>
+        <label class="text-sm text-gray-600">Tên</label>
+        <input [(ngModel)]="editData.lastName" class="w-full px-4 py-2 border rounded" type="text" />
+      </div>
+      <div class="md:col-span-2">
+        <label class="text-sm text-gray-600">Email</label>
+        <input [(ngModel)]="editData.email" class="w-full px-4 py-2 border rounded" type="text" />
+      </div>
+    </div>
+
+    <button (click)="updateProfile()" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
+      Lưu thay đổi
+    </button>
+  </div>
+
+
+  <!-- Form cập nhật mật khẩu -->
+  <div *ngIf="showChangePasswordForm" class="mt-6 space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="md:col-span-2">
+        <label class="text-sm text-gray-600">Mật khẩu cũ</label>
+        <input [(ngModel)]="editPasswordData.oldPassword" name="oldPassword" type="password"
+          class="w-full px-4 py-2 border rounded" required />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-600">Mật khẩu mới</label>
+        <input [(ngModel)]="editPasswordData.newPassword" name="newPassword" type="password"
+          class="w-full px-4 py-2 border rounded" required />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-600">Xác nhận mật khẩu mới</label>
+        <input [(ngModel)]="editPasswordData.confirmPassword" name="confirmPassword" type="password"
+          class="w-full px-4 py-2 border rounded" required />
+      </div>
+    </div>
+
+    <button (click)="onChangePassword()"
+      class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
+      Đổi mật khẩu
+    </button>
+  </div>
+</div>

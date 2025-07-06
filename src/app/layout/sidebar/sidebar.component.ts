@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { UserResponse } from '../../models/user.response';
 import { AuthService } from '../../services/auth.service';
 import { ApiResponse } from '../../models/api.response';
-import { RouterLinkActive } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   imports: [
-    RouterLinkActive
+    
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
@@ -16,7 +16,8 @@ export class SidebarComponent {
   currentUser: UserResponse | null = null;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -24,5 +25,13 @@ export class SidebarComponent {
       next: (res: ApiResponse) => this.currentUser = res.data,
       error: () => this.currentUser = null
     });
+  }
+
+  goToClassroomList() {
+    this.router.navigate(['/classroom']);
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
   }
 }

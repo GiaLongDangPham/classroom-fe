@@ -10,6 +10,10 @@ import { PostService } from '../../../services/post.service';
 import { ApiResponse } from '../../../models/api.response';
 import { ClassroomResponse } from '../../../models/response/classroom.response';
 import { AvatarComponent } from "../../shared/avatar/avatar.component";
+import { PostInteractionService } from '../../../services/post-interaction.service';
+import { PostCommentResponse } from '../../../models/response/post-comment.response';
+import { UserResponse } from '../../../models/response/user.response';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-classroom-detail',
@@ -25,6 +29,7 @@ import { AvatarComponent } from "../../shared/avatar/avatar.component";
 })
 export class ClassroomDetailComponent implements OnInit{
 
+  user: UserResponse = {};
   classroom: ClassroomResponse = {};
   classroomId!: number;
   loading = true;
@@ -32,6 +37,7 @@ export class ClassroomDetailComponent implements OnInit{
   posts: PostResponse[] = [];
   defaultAvatar = '/assets/default-avatar.png';
   visibleMembers:number = 2;
+  isCreatingPost = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,9 +45,13 @@ export class ClassroomDetailComponent implements OnInit{
     private toastr: ToastrService,
     private router: Router,
     private postService: PostService,
+    private postInteractionService: PostInteractionService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.user = this.userService.getUserFromLocalStorage() || {}; // Lấy user từ localStorage
+
     this.classroomId = Number(this.route.snapshot.paramMap.get('id'));
     this.classroomService.getClassDetail(this.classroomId).subscribe({
       next: (res: ApiResponse) => {
@@ -71,6 +81,11 @@ export class ClassroomDetailComponent implements OnInit{
     });
   }
 
+  postCreated() {
+    this.isCreatingPost = false;
+    this.loadPosts();
+  }
+  
   goBack() {
     this.router.navigate(['/classroom']);
   }
@@ -91,5 +106,14 @@ export class ClassroomDetailComponent implements OnInit{
         this.toastr.error('Thao tác thất bại');
       }
     });
+  }
+
+  toggleCreatePost() {
+    this.isCreatingPost = !this.isCreatingPost;
+  }
+
+  onCancelClick(){
+    this.isCreatingPost = false;
+
   }
 }

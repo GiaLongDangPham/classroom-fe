@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PostService } from '../../../../services/post.service';
 import { CommonModule } from '@angular/common';
@@ -18,6 +18,7 @@ import { FileService } from '../../../../services/file.service';
 export class CreatePostComponent {
 
   @Input() classroomId!: number;
+  @Output() postCreated = new EventEmitter<void>();
 
   postForm: FormGroup;
   previewUrl: string | null = null;
@@ -42,6 +43,10 @@ export class CreatePostComponent {
 
     this.imageFile = input.files[0];
 
+    if (this.imageFile.size > 5 * 1024 * 1024) {
+      alert('Ảnh quá lớn (tối đa 5MB)');
+      return;
+    }
     // Preview ảnh
     const reader = new FileReader();
     reader.onload = () => {
@@ -88,7 +93,9 @@ export class CreatePostComponent {
         this.previewUrl = null;
         this.imageFile = null;
         this.isUploading = false;
+
         window.location.reload(); // Tải lại trang để hiển thị bài viết mới
+        this.postCreated.emit(); // 👈 báo cho component cha biết đã đăng xong
       },
       error: (err) => {
         debugger

@@ -43,6 +43,12 @@ export class UserService {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
+  getUserFromLocalStorage(): UserResponse | null {
+    const userResponseJSON = localStorage.getItem('user'); 
+    const userResponse = JSON.parse(userResponseJSON!);  
+    return userResponse || null; // Trả về đối tượng rỗng nếu không có dữ liệu
+  }
+
   getAvatarUrl(filename: string): string {
     if (!filename) {
       return '/assets/default-avatar.png'; // Default avatar

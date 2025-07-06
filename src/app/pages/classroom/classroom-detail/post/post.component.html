@@ -1,25 +1,66 @@
-<div class="bg-white rounded-xl shadow p-5 space-y-4">
-  <!-- Header: Avatar + Tên + Thời gian -->
+<div class="bg-white rounded-xl shadow p-5 space-y-4 mb-10">
   <div class="flex items-center gap-3">
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/147/147144.png"
-      alt="avatar"
-      class="w-10 h-10 rounded-full object-cover border"
-    />
+    <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="avatar" class="w-10 h-10 rounded-full object-cover border" />
     <div>
       <p class="font-semibold text-gray-800">{{ post.createdBy }}</p>
-      <p class="text-sm text-gray-500">{{ post.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+      <p class="text-sm text-gray-500">{{ post.createdAt | timeAgo }}</p>
     </div>
   </div>
 
-  <!-- Nội dung -->
   <div>
     <h4 class="text-xl font-semibold text-gray-900 mb-1">{{ post.title }}</h4>
     <p class="text-gray-800 whitespace-pre-line">{{ post.content }}</p>
   </div>
 
-  <!-- Hình ảnh -->
   <div *ngIf="post.imageUrl" class="mt-3">
     <img [src]="post.imageUrl" alt="post image" class="w-full rounded-xl max-h-[400px] object-cover border" />
+  </div>
+
+  <!-- Tương tác -->
+  <div class="flex items-center justify-around text-gray-600 border-t pt-3">
+    <button class="flex items-center gap-1 hover:text-red-500 transition" (click)="onLike()">
+      <i class="fa" [ngClass]="post.liked ? 'fa-solid fa-heart text-red-500' : 'fa-regular fa-heart'"></i>
+      <span>{{ post.likeCount }} Thích</span>
+    </button>
+
+    <button class="flex items-center gap-1 hover:text-blue-500 transition" (click)="toggleComment()">
+      <i class="fa-regular fa-comment"></i>
+      <span>{{post.comments?.length}} Bình luận</span>
+    </button>
+
+    <button class="flex items-center gap-1 hover:text-green-500 transition" (click)="onShare(post)">
+      <i class="fa-solid fa-share"></i>
+      <span>Chia sẻ</span>
+    </button>
+  </div>
+
+
+  <!-- Khung bình luận -->
+  <div *ngIf="post.showComments" class="pt-3 border-t mt-2 space-y-2">
+    <!-- Danh sách bình luận -->
+    <div *ngFor="let comment of visibleComments" class="flex items-start gap-3 bg-gray-50 p-3 rounded-xl shadow-sm">
+      <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png"
+          class="w-8 h-8 rounded-full object-cover border" />
+      <div class="flex-1">
+        <div class="bg-white rounded-xl px-4 py-2 shadow text-sm">
+          <span class="font-semibold text-gray-800">{{ comment.createdBy }}</span>
+          <span class="text-gray-700">: {{ comment.content }}</span>
+        </div>
+        <div class="text-xs text-gray-500 mt-1 pl-1">{{ comment.createdAt | timeAgo }}</div>
+      </div>
+    </div>
+    <!-- Nút Xem thêm bình luận -->
+    <button *ngIf="post.comments && post.comments.length > visibleComment"
+            (click)="showMoreComments()"
+            class="flex items-center gap-2 text-gray-600 hover:text-blue-600 text-sm px-3 py-1 mt-2 rounded-full bg-gray-100 hover:bg-blue-100 transition duration-200">
+      <i class="fa-regular fa-comment"></i>
+      <span>Xem thêm bình luận</span>
+    </button>
+
+    <!-- Form nhập bình luận -->
+    <div class="flex items-center gap-2">
+      <input type="text" [(ngModel)]="post.newComment" placeholder="Viết bình luận..." class="flex-1 border px-3 py-1 rounded-full text-sm" />
+      <button class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-600" (click)="submitComment()">Gửi</button>
+    </div>
   </div>
 </div>

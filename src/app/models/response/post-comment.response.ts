@@ -5,4 +5,5 @@ export interface PostCommentResponse{
   content?: string;
   createdAt?: Date;
   createdBy?: string; // Tên người tạo bình luận
+  avatarUrl?: string; // Avatar người tạo bình luận
 }

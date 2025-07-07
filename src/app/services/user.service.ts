@@ -66,24 +66,13 @@ export class UserService {
     return avatarUrl;
   }
 
-  // Method để test avatar có accessible không
-  testAvatarAccess(filename: string): Observable<any> {
-    const url = this.getAvatarUrl(filename);
-    console.log('🧪 Testing avatar access:', url);
-    
-    return this.http.get(url, { 
-      observe: 'response',
-      responseType: 'blob' 
-    });
-  }
-
   getCurrentUser(): UserResponse | null {
     const userStr = localStorage.getItem('user');
     return userStr ? JSON.parse(userStr) : null;
   }
 
-  uploadAvatar(formData: FormData): Observable<UserResponse> {
-    const url = this.baseUrl + '/avatar';
-    return this.http.post<UserResponse>(url, formData);
+  updateAvatar(avatarUrl: string): Observable<UserResponse> {
+    const url = this.baseUrl + '/me/avatar';
+    return this.http.put<UserResponse>(url, { avatarUrl }); // 👈 dùng object JSON
   }
 }

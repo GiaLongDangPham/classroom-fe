@@ -1,6 +1,6 @@
 <div class="bg-white rounded-xl shadow p-5 space-y-4 mb-10">
   <div class="flex items-center gap-3">
-    <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="avatar" class="w-10 h-10 rounded-full object-cover border" />
+    <img [src]="post.avatarUrl || defaultAvatar" alt="avatar" class="w-10 h-10 rounded-full border-2 border-blue-500 object-cover" />
     <div>
       <p class="font-semibold text-gray-800">{{ post.createdBy }}</p>
       <p class="text-sm text-gray-500">{{ post.createdAt | timeAgo }}</p>
@@ -39,8 +39,14 @@
   <div *ngIf="post.showComments" class="pt-3 border-t mt-2 space-y-2">
     <!-- Danh sách bình luận -->
     <div *ngFor="let comment of visibleComments" class="flex items-start gap-3 bg-gray-50 p-3 rounded-xl shadow-sm">
-      <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png"
-          class="w-8 h-8 rounded-full object-cover border" />
+
+      <app-avatar 
+        [user]="{ avatarUrl: comment.avatarUrl }" 
+        [isAllowUpload]="false"
+        [width]="'w-8'"
+        [height]="'h-8'"
+      ></app-avatar>
+
       <div class="flex-1">
         <div class="bg-white rounded-xl px-4 py-2 shadow text-sm">
           <span class="font-semibold text-gray-800">{{ comment.createdBy }}</span>

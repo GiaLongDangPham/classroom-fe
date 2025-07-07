@@ -4,6 +4,9 @@ import { PostService } from '../../../../services/post.service';
 import { CommonModule } from '@angular/common';
 import { PostRequest } from '../../../../models/request/post.request';
 import { FileService } from '../../../../services/file.service';
+import { AvatarComponent } from '../../../shared/avatar/avatar.component';
+import { UserResponse } from '../../../../models/response/user.response';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-create-post',
@@ -11,6 +14,7 @@ import { FileService } from '../../../../services/file.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    AvatarComponent
 ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss'
@@ -18,6 +22,8 @@ import { FileService } from '../../../../services/file.service';
 export class CreatePostComponent {
 
   @Input() classroomId!: number;
+  user: UserResponse = {}; // Thêm input để nhận user từ component cha
+
   @Output() postCreated = new EventEmitter<void>();
 
   postForm: FormGroup;
@@ -28,13 +34,18 @@ export class CreatePostComponent {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
-    private fileService: FileService
+    private fileService: FileService,
+    private userService: UserService
   ) {
     this.postForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
       imageUrl: [''] // optional
     });
+  }
+
+  ngOnInit() {
+    this.user = this.userService.getUserFromLocalStorage() || {}; // Lấy user từ localStorage
   }
 
   onFileSelected(event: Event) {

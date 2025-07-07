@@ -6,13 +6,15 @@ import { TimeAgoPipe } from '../../../../pipes/time-ago.pipe';
 import { PostInteractionService } from '../../../../services/post-interaction.service';
 import { UserResponse } from '../../../../models/response/user.response';
 import { PostCommentResponse } from '../../../../models/response/post-comment.response';
+import { AvatarComponent } from '../../../shared/avatar/avatar.component';
 @Component({
   selector: 'app-post',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
-    TimeAgoPipe
+    TimeAgoPipe,
+    AvatarComponent
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
@@ -20,7 +22,8 @@ import { PostCommentResponse } from '../../../../models/response/post-comment.re
 export class PostComponent {
   @Input() post: PostResponse = {}; 
   @Input() user: UserResponse = {}; 
-  visibleComment: number = 1;
+  visibleComment: number = 2;
+  defaultAvatar = '/assets/default-avatar.png';
 
   constructor(
     private postInteractionService: PostInteractionService,

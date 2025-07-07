@@ -1,11 +1,22 @@
 <div class="min-h-screen bg-gray-50 p-6 mt-16 max-w-[700px] mx-auto" *ngIf="!loading">
   <!-- Nút quay lại -->
-  <button
-    (click)="goBack()"
-    class="mb-4 px-4 py-2 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition"
-  >
-    ← Quay lại danh sách lớp
-  </button>
+  <div class="flex items-center justify-between mb-4">
+    <!-- Nút Quay lại -->
+    <button
+      (click)="goBack()"
+      class="px-4 py-2 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition"
+    >
+      ← Quay lại danh sách lớp
+    </button>
+
+    <!-- Nút Rời/Xoá lớp -->
+    <button
+      (click)="leaveOrDelete()"
+      class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition"
+    >
+      {{ isCreator ? 'Xoá lớp học' : 'Rời lớp học' }}
+    </button>
+  </div>
 
   <!-- Accordion: Thông tin lớp -->
   <details class="mb-4 bg-white rounded-xl shadow">
@@ -15,12 +26,7 @@
       <p class="text-gray-600">Người tạo: <strong>{{ classroom.createdBy }}</strong></p>
       <p class="text-gray-600">Mã lớp: <strong>{{ classroom.joinCode }}</strong></p>
 
-      <button
-        (click)="leaveOrDelete()"
-        class="mt-2 px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition"
-      >
-        {{ isCreator ? 'Xoá lớp học' : 'Rời lớp học' }}
-      </button>
+      
     </div>
   </details>
 
@@ -61,37 +67,31 @@
     *ngIf="!isCreatingPost"
   >
     <!-- Avatar người dùng -->
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/147/147144.png"
-      alt="avatar"
-      class="w-10 h-10 rounded-full object-cover border"
-    />
+    <app-avatar [user]="user" [width]="'w-10'" [height]="'h-10'" [isAllowUpload]="false"></app-avatar>
 
     <!-- Placeholder -->
-    <p class="text-gray-600 font-medium">Bạn đang nghĩ gì?</p>
+    <p class="text-gray-600 font-medium">Bạn muốn chia sẻ điều gì?</p>
+  </div>
+  <button
+    type="button"
+    (click)="onCancelClick()"
+    class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-100"
+    *ngIf="isCreatingPost"
+  >
+    Huỷ
+  </button>
+
+  <!-- Form tạo bài viết -->
+  <div *ngIf="isCreatingPost" class="bg-white p-4 rounded-xl shadow">
+    <app-create-post 
+      [classroomId]="classroomId"
+      (postCreated)="postCreated()"
+    ></app-create-post>
   </div>
 
   <!-- Danh sách bài viết + form -->
-  <div class="space-y-4">
+  <div class="space-y-4 mt-10">
     <h3 class="text-2xl font-semibold text-gray-800 mb-2">Bài viết trong lớp</h3>
-
-
-    <button
-      type="button"
-      (click)="onCancelClick()"
-      class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-100"
-      *ngIf="isCreatingPost"
-    >
-      Huỷ
-    </button>
-    <!-- Form tạo bài viết -->
-    <div *ngIf="isCreatingPost" class="bg-white p-4 rounded-xl shadow">
-      <app-create-post 
-        [classroomId]="classroomId"
-        (postCreated)="postCreated()"
-      ></app-create-post>
-    </div>
-
     <!-- Danh sách bài viết -->
     <app-post *ngFor="let post of posts" 
       [post]="post"

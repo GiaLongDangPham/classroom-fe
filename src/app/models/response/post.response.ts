@@ -5,6 +5,7 @@ export interface PostResponse{
   title?: string;
   content?: string; 
   imageUrl?: string;
+  avatarUrl?: string
   createdAt?: Date;
   createdBy?: string;  
   classroomId?: number;

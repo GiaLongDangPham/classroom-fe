@@ -57,7 +57,7 @@ export class ClassroomDetailComponent implements OnInit{
       next: (res: ApiResponse) => {
         debugger
         this.classroom = res.data;
-        this.isCreator = res.data.isCreatedByCurrentUser; // backend nên gửi field này
+        this.isCreator = `${this.user.firstName} ${this.user.lastName}` == res.data.createdBy;
         this.loading = false;
       },
       error: () => {

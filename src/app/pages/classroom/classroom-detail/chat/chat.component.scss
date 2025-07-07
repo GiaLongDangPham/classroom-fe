@@ -1,0 +1,60 @@
+.chat-wrapper {
+  @apply fixed bottom-20 right-6 w-[350px] h-[500px] z-40;
+  @apply flex flex-col bg-white border border-gray-300 rounded-xl shadow-lg overflow-hidden;
+}
+
+.chat-header {
+  @apply bg-blue-500 text-white text-center py-2 font-semibold shrink-0;
+}
+
+.chat-messages {
+  @apply flex-1 min-h-0 overflow-y-auto p-3 space-y-2 bg-gray-50;
+}
+
+.message-row {
+  @apply flex;
+}
+
+.from-me {
+  @apply justify-end;
+}
+
+.message-container {
+  @apply flex items-end gap-2 max-w-[80%];
+}
+
+.message-container.reverse {
+  @apply flex-row-reverse;
+}
+
+.message-meta {
+  @apply text-xs text-gray-500 mb-1;
+}
+
+.sender-name {
+  @apply font-semibold;
+}
+
+.message-time {
+  @apply ml-1 text-[10px] text-gray-400;
+}
+
+.message-bubble {
+  @apply px-3 py-2 rounded-xl shadow text-sm whitespace-pre-wrap break-words bg-white;
+}
+
+.message-bubble.mine {
+  @apply bg-blue-100 text-right;
+}
+
+.chat-input {
+  @apply p-3 border-t bg-white flex gap-2 shrink-0;
+}
+
+.input-box {
+  @apply flex-1 border rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400;
+}
+
+.send-button {
+  @apply bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 text-sm;
+}

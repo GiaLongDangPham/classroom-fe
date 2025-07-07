@@ -98,4 +98,22 @@
       [user]="user"
     ></app-post>
   </div>
+
+  <!-- Nút bật/tắt chat nổi -->
+  <button 
+    (click)="showChat = !showChat"
+    class="fixed bottom-10 right-10 w-44 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold text-lg rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transform transition-all duration-300 z-50 flex items-center justify-center gap-2"
+  >
+    <span class="text-xl"><i class="fa-solid fa-comment"></i></span>
+    <span>{{ showChat ? 'Đóng' : 'Chat' }}</span>
+  </button>
+
+  <!-- Khung chat nổi -->
+  <app-chat 
+    *ngIf="showChat"
+    [classroomId]="classroomId" 
+    [currentUser]="user"
+  />
+
 </div>
+

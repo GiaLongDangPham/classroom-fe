@@ -1,0 +1,73 @@
+<!-- Layout chat nổi -->
+<div class="chat-wrapper">
+  <!-- Header -->
+  <div class="chat-header">
+    Chat lớp học
+  </div>
+
+  <!-- Danh sách tin nhắn -->
+  <div class="chat-messages" id="chat-container">
+    <div 
+      *ngFor="let msg of messages; let i = index" 
+      class="flex"
+      [ngClass]="{ 'justify-end': isCurrentUser(msg) }"
+    >
+      <div 
+        class="flex items-end gap-2 max-w-[80%]"
+        [ngClass]="{ 'flex-row-reverse': isCurrentUser(msg) }"
+      >
+        <!-- Avatar nếu là người khác và khác người gửi trước -->
+        <ng-container *ngIf="shouldShowSenderInfo(i, msg)">
+          <app-avatar 
+            [user]="msg.user" 
+            [width]="'w-8'" 
+            [height]="'h-8'" 
+            [isAllowUpload]="false"
+          ></app-avatar>
+        </ng-container>
+
+        <!-- Không render gì nếu là currentUser -->
+        <ng-container *ngIf="!shouldShowSenderInfo(i, msg) && !isCurrentUser(msg)">
+          <div class="w-8 h-8"></div>
+        </ng-container>
+
+        <div>
+          <!-- Tên và thời gian nếu là tin đầu của cụm -->
+          <div *ngIf="shouldShowSenderInfo(i, msg)" class="text-xs text-gray-500 mb-1">
+            <span class="font-semibold">{{ msg.user.firstName }} {{ msg.user.lastName }}</span>
+            <span class="ml-1 text-[10px] text-gray-400">
+              {{ formatTime(msg.sentAt) }}
+            </span>
+          </div>
+
+          <!-- Nội dung tin nhắn -->
+          <div 
+            class="px-3 py-2 rounded-xl shadow text-sm whitespace-pre-wrap break-words"
+            [ngClass]="{
+              'bg-blue-100 text-right': isCurrentUser(msg),
+              'bg-white': !isCurrentUser(msg)
+            }"
+          >
+            {{ msg.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ô nhập -->
+  <div class="chat-input">
+    <input 
+      [(ngModel)]="newMessage"
+      (keydown.enter)="sendMessage()"
+      class="input-box"
+      placeholder="Nhập tin nhắn..." 
+    />
+    <button 
+      (click)="sendMessage()" 
+      class="send-button"
+    >
+      Gửi
+    </button>
+  </div>
+</div>

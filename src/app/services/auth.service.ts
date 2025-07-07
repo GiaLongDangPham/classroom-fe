@@ -30,13 +30,24 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    if (typeof window === 'undefined') return null; // 👈 chống lỗi SSR
-    return localStorage.getItem('token');
+    if (typeof window === 'undefined') return null; // SSR check
+    
+    const token = localStorage.getItem('token');
+    console.log('🔑 Getting token:', token);
+    return token;
   }
 
   setToken(token: string) {
-    if (typeof window === 'undefined') return; // 👈 chống lỗi SSR
+    console.log('🔑 Setting token:', token);
+    console.log('🔑 Window check:', typeof window);
+    
+    if (typeof window === 'undefined') {
+      console.log('🔑 Window undefined, skipping localStorage');
+      return; // SSR check
+    }
+    
     localStorage.setItem('token', token);
+    console.log('🔑 Token saved successfully:', localStorage.getItem('token'));
   }
 
   logout() {

@@ -10,10 +10,9 @@ import { PostService } from '../../../services/post.service';
 import { ApiResponse } from '../../../models/api.response';
 import { ClassroomResponse } from '../../../models/response/classroom.response';
 import { AvatarComponent } from "../../shared/avatar/avatar.component";
-import { PostInteractionService } from '../../../services/post-interaction.service';
-import { PostCommentResponse } from '../../../models/response/post-comment.response';
 import { UserResponse } from '../../../models/response/user.response';
 import { UserService } from '../../../services/user.service';
+import { ChatComponent } from './chat/chat.component';
 
 @Component({
   selector: 'app-classroom-detail',
@@ -22,7 +21,8 @@ import { UserService } from '../../../services/user.service';
     CommonModule,
     CreatePostComponent,
     PostComponent,
-    AvatarComponent
+    AvatarComponent,
+    ChatComponent
 ],
   templateUrl: './classroom-detail.component.html',
   styleUrl: './classroom-detail.component.scss'
@@ -38,6 +38,7 @@ export class ClassroomDetailComponent implements OnInit{
   defaultAvatar = '/assets/default-avatar.png';
   visibleMembers:number = 2;
   isCreatingPost = false;
+  showChat = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +46,6 @@ export class ClassroomDetailComponent implements OnInit{
     private toastr: ToastrService,
     private router: Router,
     private postService: PostService,
-    private postInteractionService: PostInteractionService,
     private userService: UserService
   ) {}
 

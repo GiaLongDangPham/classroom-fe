@@ -6,8 +6,6 @@ import { UserResponse } from '../../../../models/response/user.response';
 import { ChatService } from '../../../../services/chat.service';
 import { AvatarComponent } from '../../../shared/avatar/avatar.component';
 import { Subscription } from 'rxjs';
-import { formatDistanceToNow } from 'date-fns';
-import { TimeAgoPipe } from '../../../../pipes/time-ago.pipe';
 
 @Component({
   selector: 'app-chat',
@@ -16,7 +14,6 @@ import { TimeAgoPipe } from '../../../../pipes/time-ago.pipe';
     CommonModule,
     FormsModule,
     AvatarComponent,
-    TimeAgoPipe
   ],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],

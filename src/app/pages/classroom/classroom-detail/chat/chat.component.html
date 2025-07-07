@@ -1,4 +1,4 @@
-<!-- Layout chat nổi -->
+<!-- chat.component.html -->
 <div class="chat-wrapper">
   <!-- Header -->
   <div class="chat-header">
@@ -9,15 +9,15 @@
   <div class="chat-messages" id="chat-container">
     <div 
       *ngFor="let msg of messages; let i = index" 
-      class="flex"
-      [ngClass]="{ 'justify-end': isCurrentUser(msg) }"
+      class="message-row"
+      [ngClass]="{ 'from-me': isCurrentUser(msg) }"
     >
       <div 
-        class="flex items-end gap-2 max-w-[80%]"
-        [ngClass]="{ 'flex-row-reverse': isCurrentUser(msg) }"
+        class="message-container"
+        [ngClass]="{ 'reverse': isCurrentUser(msg) }"
       >
-        <!-- Avatar nếu là người khác và khác người gửi trước -->
-        <ng-container *ngIf="shouldShowSenderInfo(i, msg)">
+        <!-- Avatar -->
+        <ng-container *ngIf="shouldShowAvatar(i, msg)">
           <app-avatar 
             [user]="msg.user" 
             [width]="'w-8'" 
@@ -26,36 +26,39 @@
           ></app-avatar>
         </ng-container>
 
-        <!-- Không render gì nếu là currentUser -->
-        <ng-container *ngIf="!shouldShowSenderInfo(i, msg) && !isCurrentUser(msg)">
+        <ng-container *ngIf="!shouldShowAvatar(i, msg) && !isCurrentUser(msg)">
           <div class="w-8 h-8"></div>
         </ng-container>
 
         <div>
-          <!-- Tên và thời gian nếu là tin đầu của cụm -->
-          <div *ngIf="shouldShowSenderInfo(i, msg)" class="text-xs text-gray-500 mb-1">
-            <span class="font-semibold">{{ msg.user.firstName }} {{ msg.user.lastName }}</span>
-            <span class="ml-1 text-[10px] text-gray-400">
-              {{ formatTime(msg.sentAt) }}
-            </span>
+          <!-- Tên + thời gian -->
+          <div *ngIf="shouldShowSenderInfo(i, msg)" class="message-meta">
+            <span class="sender-name">{{ msg.user.firstName }} {{ msg.user.lastName }}</span>
           </div>
 
           <!-- Nội dung tin nhắn -->
-          <div 
-            class="px-3 py-2 rounded-xl shadow text-sm whitespace-pre-wrap break-words"
-            [ngClass]="{
-              'bg-blue-100 text-right': isCurrentUser(msg),
-              'bg-white': !isCurrentUser(msg)
-            }"
-          >
-            {{ msg.content }}
+          <div class="message-wrapper group relative">
+            <!-- Tooltip thời gian bên trái -->
+            <div
+              class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full opacity-0 group-hover:opacity-100 transition-all duration-300 bg-gray-700 text-white text-xs px-2 py-1 rounded shadow whitespace-nowrap z-50"
+            >
+              {{ msg.sentAt | date: 'HH:mm' }}
+            </div>
+
+            <!-- Nội dung tin nhắn -->
+            <div 
+              class="message-bubble"
+              [ngClass]="{ 'mine': isCurrentUser(msg) }"
+            >
+              {{ msg.content }}
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Ô nhập -->
+  <!-- Nhập tin nhắn -->
   <div class="chat-input">
     <input 
       [(ngModel)]="newMessage"
@@ -63,10 +66,7 @@
       class="input-box"
       placeholder="Nhập tin nhắn..." 
     />
-    <button 
-      (click)="sendMessage()" 
-      class="send-button"
-    >
+    <button (click)="sendMessage()" class="send-button">
       Gửi
     </button>
   </div>

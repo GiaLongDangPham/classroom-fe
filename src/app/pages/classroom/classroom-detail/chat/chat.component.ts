@@ -7,6 +7,7 @@ import { ChatService } from '../../../../services/chat.service';
 import { AvatarComponent } from '../../../shared/avatar/avatar.component';
 import { Subscription } from 'rxjs';
 import { formatDistanceToNow } from 'date-fns';
+import { TimeAgoPipe } from '../../../../pipes/time-ago.pipe';
 
 @Component({
   selector: 'app-chat',
@@ -14,7 +15,8 @@ import { formatDistanceToNow } from 'date-fns';
   imports: [
     CommonModule,
     FormsModule,
-    AvatarComponent
+    AvatarComponent,
+    TimeAgoPipe
   ],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
@@ -73,13 +75,15 @@ export class ChatComponent implements OnInit, OnDestroy {
       el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
     }
   }
-
-  formatTime(date: string | Date): string {
-    return formatDistanceToNow(new Date(date), { addSuffix: true });
-  }
-
+  
   isCurrentUser(msg: ChatMessageResponse): boolean {
     return msg.user.id === this.currentUser.id;
+  }
+
+  shouldShowAvatar(index: number, msg: ChatMessageResponse): boolean {
+    if (this.isCurrentUser(msg)) return false;
+    if (index === this.messages.length - 1) return true;
+    return this.messages[index + 1].user.id !== msg.user.id;
   }
 
   shouldShowSenderInfo(index: number, msg: ChatMessageResponse): boolean {

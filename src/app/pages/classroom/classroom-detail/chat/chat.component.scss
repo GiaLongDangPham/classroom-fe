@@ -8,11 +8,12 @@
 }
 
 .chat-messages {
-  @apply flex-1 min-h-0 overflow-y-auto p-3 space-y-2 bg-gray-50;
+  @apply flex-1 overflow-y-auto p-3 space-y-2 bg-gray-50;
+  max-height: 100%;
 }
 
 .message-row {
-  @apply flex;
+  @apply flex w-full items-end;
 }
 
 .from-me {
@@ -20,11 +21,12 @@
 }
 
 .message-container {
-  @apply flex items-end gap-2 max-w-[80%];
+  @apply flex items-end gap-1 max-w-[80%];
+  max-width: 100%;
 }
 
 .message-container.reverse {
-  @apply flex-row-reverse;
+  @apply flex-row-reverse justify-end;
 }
 
 .message-meta {
@@ -40,11 +42,19 @@
 }
 
 .message-bubble {
-  @apply px-3 py-2 rounded-xl shadow text-sm whitespace-pre-wrap break-words bg-white;
+  @apply px-3 py-2 rounded-xl shadow text-sm bg-white;
+  word-break: break-word;        /* bắt buộc có */
+  max-width: 200px;
+  white-space: normal;           /* CHÍNH LÀ ĐÂY */
 }
 
+
 .message-bubble.mine {
-  @apply bg-blue-100 text-right;
+  @apply bg-blue-100 text-left;
+  align-self: flex-end;
+  word-break: break-word;
+  max-width: 250px;
+  border-radius: 16px 16px 0px 16px;
 }
 
 .chat-input {

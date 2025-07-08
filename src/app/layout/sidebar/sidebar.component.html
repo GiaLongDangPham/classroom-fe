@@ -1,9 +1,10 @@
-<aside class="w-64 h-screen bg-white p-6 shadow-md fixed top-16 left-0">
+<aside class="h-full bg-white p-6 shadow-md w-64">
   <h2 class="text-2xl font-bold text-blue-600 mb-8">Classroom</h2>
 
   <nav class="flex flex-col gap-4">
-    <a (click)="goToClassroomList()" class="text-gray-700 hover:text-blue-600 cursor-pointer">🏠 Lớp học</a>
-    <a (click)="goToProfile()" class="text-gray-700 hover:text-blue-600 cursor-pointer">👤 Hồ sơ</a>
+    <a routerLink="/classroom" class="text-gray-700 hover:text-blue-600"><i class="fa-solid fa-landmark"></i> Lớp học</a>
+    <a routerLink="/profile" class="text-gray-700 hover:text-blue-600"><i class="fa-solid fa-user"></i> Hồ sơ</a>
+    <a routerLink="/messages" class="text-gray-700 hover:text-blue-600"><i class="fa-solid fa-comments"></i> Tin nhắn</a>
   </nav>
 
   <div class="mt-10 border-t pt-4 text-sm text-gray-500">

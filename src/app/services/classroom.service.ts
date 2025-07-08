@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { ClassroomRequest } from '../models/request/classroom.model';
 import { ApiResponse } from '../models/api.response';
+import { ClassroomResponse } from '../models/response/classroom.response';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ export class ClassroomService {
   }
 
   // GET /my-classes
-  getMyClasses(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/my-classes`);
+  getMyClasses(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/my-classes`);
   }
 
   // GET /:id

@@ -1,0 +1,82 @@
+/* Message List Component Styles */
+
+.message-item {
+  padding: 0.75rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  border-left: 3px solid transparent;
+  
+  &:hover {
+    background-color: #eff6ff;
+    transform: translateX(2px);
+  }
+  
+  &.selected {
+    background-color: #3b82f6;
+    color: white;
+    transform: translateX(4px);
+    
+    &:hover {
+      background-color: #2563eb;
+    }
+    
+    .classroom-name {
+      color: white;
+      font-weight: 700;
+    }
+    
+    .last-message {
+      color: #dbeafe;
+    }
+  }
+  
+  &.default {
+    background-color: #f3f4f6;
+    
+    .classroom-name {
+      color: #111827;
+    }
+    
+    .last-message {
+      color: #6b7280;
+    }
+  }
+}
+
+.classroom-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.last-message {
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Scrollbar styling */
+.message-list-container {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f8fafc;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background-color: #f3f4f6;
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 3px;
+    
+    &:hover {
+      background-color: #9ca3af;
+    }
+  }
+}

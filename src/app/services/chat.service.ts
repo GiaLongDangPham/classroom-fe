@@ -22,7 +22,11 @@ export class ChatService {
 
 
   connect(classroomId: number) {
-    if (this.stompClient?.connected) return;
+    if (this.stompClient) {
+      // Ngắt kết nối cũ (nếu đang kết nối)
+      this.stompClient.deactivate();
+      this.stompClient = null;
+    }
 
     this.stompClient = new Client({
       webSocketFactory: () => new SockJS('http://localhost:8080/ws'),
@@ -63,7 +67,10 @@ export class ChatService {
   }
 
   disconnect() {
-    this.stompClient?.deactivate();
+    if (this.stompClient) {
+      this.stompClient.deactivate();
+      this.stompClient = null;  // Quan trọng để lần sau connect lại
+    }
   }
 
   getMessages(classroomId: number): Observable<ChatMessageResponse[]> {

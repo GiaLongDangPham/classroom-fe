@@ -1,0 +1,12 @@
+<div class="p-4 space-y-3 h-full overflow-y-auto message-list-container">
+  <div 
+    *ngFor="let c of classList"
+    (click)="openChat.emit(c)"
+    [class]="'message-item ' + (isSelected(c) ? 'selected' : 'default')"
+  >
+    <div class="classroom-name">{{ c.name }}</div>
+    <div class="last-message">
+      {{ c.lastMessage || 'Chưa có tin nhắn' }}
+    </div>
+  </div>
+</div>

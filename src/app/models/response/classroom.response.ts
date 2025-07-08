@@ -7,4 +7,6 @@ export interface ClassroomResponse {
   joinCode?: string;
   createdBy?: string;
   members?: MemberResponse[];
+
+  lastMessage?: string;
 }

@@ -3,6 +3,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { authGuard } from './guards/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { MessagePageComponent } from './pages/messages/message-page/message-page.component';
 
 
 
@@ -16,5 +17,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadChildren: () =>
       import('./pages/classroom/classroom.routes').then(m => m.CLASSROOM_ROUTES)
+  },
+  {
+    path: 'messages',
+    canActivate: [authGuard],
+    loadChildren: () =>
+      import('./pages/messages/messages.routes').then(m => m.MESSAGES_ROUTES)
   }
 ];

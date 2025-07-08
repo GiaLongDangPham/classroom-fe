@@ -1,0 +1,71 @@
+<div class="flex flex-col h-full bg-gray-50">
+  <!-- Header -->
+  <div class="p-4 bg-white border-b font-semibold text-lg text-gray-800 shrink-0">
+    {{ classroom.name || 'Lớp học' }}
+  </div>
+
+  <!-- Danh sách tin nhắn -->
+  <div id="chat-container" class="flex-1 overflow-y-auto px-2 py-4 space-y-4">
+    <div
+      *ngFor="let msg of messages; let i = index"
+      class="flex w-full"
+      [ngClass]="{ 'justify-end': isCurrentUser(msg), 'justify-start': !isCurrentUser(msg) }"
+    >
+      <div
+        class="flex items-end gap-1"
+        [ngClass]="{ 'flex-row-reverse': isCurrentUser(msg) }"
+      >
+        <!-- Avatar -->
+        <ng-container *ngIf="shouldShowAvatar(i, msg)">
+          <app-avatar
+            [user]="msg.user"
+            [width]="'w-8'"
+            [height]="'h-8'"
+            [isAllowUpload]="false"
+            class="shrink-0"
+          ></app-avatar>
+        </ng-container>
+
+        <ng-container *ngIf="!shouldShowAvatar(i, msg) && !isCurrentUser(msg)">
+          <div class="w-8 h-8 shrink-0"></div>
+        </ng-container>
+
+        <!-- Nội dung -->
+        <div class="flex flex-col">
+          <!-- Tên người gửi -->
+          <div *ngIf="shouldShowSenderInfo(i, msg)" class="text-xs text-gray-500 mb-1 ml-1">
+            {{ msg.user.firstName }} {{ msg.user.lastName }}
+          </div>
+
+          <!-- Bong bóng tin nhắn -->
+          <div
+            class="px-4 py-2 text-sm rounded-2xl shadow whitespace-pre-wrap break-words"
+            [ngClass]="{
+              'bg-blue-500 text-white self-end': isCurrentUser(msg),
+              'bg-white text-gray-800 border border-gray-200': !isCurrentUser(msg)
+            }"
+            style="max-width: 70vw;"
+          >
+            {{ msg.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gửi tin nhắn -->
+  <div class="p-4 border-t bg-white flex gap-2 items-center shrink-0">
+    <input
+      [(ngModel)]="newMessage"
+      (keydown.enter)="sendMessage()"
+      class="flex-1 border border-gray-300 px-4 py-2 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder="Nhập tin nhắn..."
+    />
+    <button
+      (click)="sendMessage()"
+      class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-blue-600 text-sm"
+    >
+      Gửi
+    </button>
+  </div>
+</div>

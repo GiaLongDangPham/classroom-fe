@@ -1,105 +1,82 @@
-<div class="min-h-screen bg-gray-50 p-6 mt-16 max-w-[700px] mx-auto" *ngIf="!loading">
-  <!-- Nút quay lại -->
-  <div class="flex items-center justify-between mb-4">
-    <!-- Nút Quay lại -->
-    <button
-      (click)="goBack()"
-      class="px-4 py-2 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition"
-    >
-      ← Quay lại danh sách lớp
-    </button>
-
-    <!-- Nút Rời/Xoá lớp -->
-    <button
-      (click)="leaveOrDelete()"
-      class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition"
-    >
-      {{ isCreator ? 'Xoá lớp học' : 'Rời lớp học' }}
-    </button>
-  </div>
-
-  <!-- Accordion: Thông tin lớp -->
-  <details class="mb-4 bg-white rounded-xl shadow">
-    <summary class="cursor-pointer px-6 py-4 text-xl font-semibold text-blue-600">Thông tin lớp học</summary>
-    <div class="p-6 space-y-2">
-      <p class="text-gray-700">{{ classroom.description }}</p>
-      <p class="text-gray-600">Người tạo: <strong>{{ classroom.createdBy }}</strong></p>
-      <p class="text-gray-600">Mã lớp: <strong>{{ classroom.joinCode }}</strong></p>
-
-      
-    </div>
-  </details>
-
-  <!-- Accordion: Danh sách thành viên -->
-  <details class="mb-4 bg-white rounded-xl shadow">
-    <summary class="cursor-pointer px-6 py-4 text-xl font-semibold text-gray-800">
-      Thành viên ({{ classroom.members?.length || 0 }})
-    </summary>
-    <div class="p-6 space-y-3">
-      <div *ngFor="let member of classroom.members | slice:0:visibleMembers"
-           class="flex items-center justify-between bg-gray-100 p-3 rounded-xl">
-        <app-avatar [user]="member" [isAllowUpload]="false"></app-avatar>
-        <div>
-          <p class="font-medium text-gray-900">{{ member.fullName }}</p>
-          <p class="text-sm text-gray-600">{{ member.email }}</p>
-        </div>
-        <span class="px-3 py-1 rounded-full text-sm font-semibold"
-              [ngClass]="{
-                'bg-blue-100 text-blue-800': member.roleInClass === 'TEACHER',
-                'bg-green-100 text-green-800': member.roleInClass === 'STUDENT'
-              }">
-          {{ member.roleInClass === 'TEACHER' ? 'Giáo viên' : 'Học sinh' }}
-        </span>
-      </div>
-      <!-- Nút Xem thêm thành viên -->
-      <button *ngIf="visibleMembers < classroom.members!.length"
-              (click)="showMoreMembers()"
-              class="flex items-center gap-2 text-gray-600 hover:text-blue-600 text-sm px-3 py-1 mt-2 rounded-full bg-gray-100 hover:bg-blue-100 transition duration-200">
-        <span>Hiển thị thêm</span>
+<main class="min-h-screen bg-gray-50 pt-20 px-4">
+  <section class="max-w-4xl mx-auto space-y-6" *ngIf="!loading">
+    <!-- Nút quay lại + Rời lớp -->
+    <div class="flex items-center justify-between">
+      <button (click)="goBack()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition">
+        ← Quay lại danh sách lớp
+      </button>
+      <button (click)="leaveOrDelete()" class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition">
+        {{ isCreator ? 'Xoá lớp học' : 'Rời lớp học' }}
       </button>
     </div>
-  </details>
 
-  <!-- Gợi ý đăng bài (nổi bật hơn) -->
-  <div
-    class="bg-white rounded-xl shadow px-5 py-4 mb-4 flex items-center gap-3 border border-gray-200 hover:shadow-md hover:border-gray-300 transition cursor-pointer"
-    (click)="toggleCreatePost()"
-    *ngIf="!isCreatingPost"
-  >
-    <!-- Avatar người dùng -->
-    <app-avatar [user]="user" [width]="'w-10'" [height]="'h-10'" [isAllowUpload]="false"></app-avatar>
+    <!-- Accordion thông tin lớp -->
+    <details class="bg-white rounded-xl shadow">
+      <summary class="cursor-pointer px-6 py-4 text-xl font-semibold text-blue-600">Thông tin lớp học</summary>
+      <div class="p-6 space-y-2">
+        <p class="text-gray-700">{{ classroom.description }}</p>
+        <p class="text-gray-600">Người tạo: <strong>{{ classroom.createdBy }}</strong></p>
+        <p class="text-gray-600">Mã lớp: <strong>{{ classroom.joinCode }}</strong></p>
+      </div>
+    </details>
 
-    <!-- Placeholder -->
-    <p class="text-gray-600 font-medium">Bạn muốn chia sẻ điều gì?</p>
-  </div>
-  <button
-    type="button"
-    (click)="onCancelClick()"
-    class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-100"
-    *ngIf="isCreatingPost"
-  >
-    Huỷ
-  </button>
+    <!-- Accordion thành viên -->
+    <details class="bg-white rounded-xl shadow">
+      <summary class="cursor-pointer px-6 py-4 text-xl font-semibold text-gray-800">
+        Thành viên ({{ classroom.members?.length || 0 }})
+      </summary>
+      <div class="p-6 space-y-3">
+        <div *ngFor="let member of classroom.members | slice:0:visibleMembers"
+             class="flex items-center justify-between bg-gray-100 p-3 rounded-xl">
+          <app-avatar [user]="member" [isAllowUpload]="false"></app-avatar>
+          <div>
+            <p class="font-medium text-gray-900">{{ member.fullName }}</p>
+            <p class="text-sm text-gray-600">{{ member.email }}</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-sm font-semibold"
+                [ngClass]="{
+                  'bg-blue-100 text-blue-800': member.roleInClass === 'TEACHER',
+                  'bg-green-100 text-green-800': member.roleInClass === 'STUDENT'
+                }">
+            {{ member.roleInClass === 'TEACHER' ? 'Giáo viên' : 'Học sinh' }}
+          </span>
+        </div>
+        <button *ngIf="visibleMembers < classroom.members!.length"
+                (click)="showMoreMembers()"
+                class="flex items-center gap-2 text-gray-600 hover:text-blue-600 text-sm px-3 py-1 mt-2 rounded-full bg-gray-100 hover:bg-blue-100 transition">
+          <span>Hiển thị thêm</span>
+        </button>
+      </div>
+    </details>
 
-  <!-- Form tạo bài viết -->
-  <div *ngIf="isCreatingPost" class="bg-white p-4 rounded-xl shadow">
-    <app-create-post 
-      [classroomId]="classroomId"
-      (postCreated)="postCreated()"
-    ></app-create-post>
-  </div>
+    <!-- Gợi ý tạo bài viết -->
+    <div class="bg-white rounded-xl shadow px-5 py-4 flex items-center gap-3 border hover:shadow-md hover:border-gray-300 transition cursor-pointer"
+         (click)="toggleCreatePost()" *ngIf="!isCreatingPost">
+      <app-avatar [user]="user" [width]="'w-10'" [height]="'h-10'" [isAllowUpload]="false"></app-avatar>
+      <p class="text-gray-600 font-medium">Bạn muốn chia sẻ điều gì?</p>
+    </div>
 
-  <!-- Danh sách bài viết + form -->
-  <div class="space-y-4 mt-10">
-    <h3 class="text-2xl font-semibold text-gray-800 mb-2">Bài viết trong lớp</h3>
+    <button *ngIf="isCreatingPost"
+            (click)="onCancelClick()"
+            class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-100">
+      Huỷ
+    </button>
+
+    <div *ngIf="isCreatingPost" class="bg-white p-4 rounded-xl shadow">
+      <app-create-post 
+        [classroomId]="classroomId"
+        (postCreated)="postCreated()"
+      ></app-create-post>
+    </div>
+
     <!-- Danh sách bài viết -->
-    <app-post *ngFor="let post of posts" 
-      [post]="post"
-      [user]="user"
-    ></app-post>
-  </div>
+    <div class="space-y-4">
+      <h3 class="text-2xl font-semibold text-gray-800 mb-2">Bài viết trong lớp</h3>
+      <app-post *ngFor="let post of posts" [post]="post" [user]="user"></app-post>
+    </div>
+  </section>
 
-  <!-- Nút bật/tắt chat nổi -->
+  <!-- Chat nổi -->
   <button 
     (click)="showChat = !showChat"
     class="fixed bottom-10 right-10 w-44 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold text-lg rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transform transition-all duration-300 z-50 flex items-center justify-center gap-2"
@@ -108,12 +85,9 @@
     <span>{{ showChat ? 'Đóng' : 'Chat' }}</span>
   </button>
 
-  <!-- Khung chat nổi -->
   <app-chat 
     *ngIf="showChat"
     [classroomId]="classroomId" 
     [currentUser]="user"
   />
-
-</div>
-
+</main>

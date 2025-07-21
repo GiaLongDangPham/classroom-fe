@@ -1,12 +1,12 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { PostService } from '../../../../services/post.service';
+import { PostService } from '../../../../core/services/post.service';
 import { CommonModule } from '@angular/common';
-import { PostRequest } from '../../../../models/request/post.request';
-import { FileService } from '../../../../services/file.service';
-import { AvatarComponent } from '../../../shared/avatar/avatar.component';
-import { UserResponse } from '../../../../models/response/user.response';
-import { UserService } from '../../../../services/user.service';
+import { PostRequest } from '../../../../shared/models/request/post.request';
+import { FileService } from '../../../../core/services/file.service';
+import { AvatarComponent } from '../../../../shared/avatar/avatar.component';
+import { UserResponse } from '../../../../shared/models/response/user.response';
+import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-create-post',

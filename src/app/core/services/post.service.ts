@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { PostRequest } from '../models/request/post.request';
-import { PostResponse } from '../models/response/post.response';
-import { ApiResponse } from '../models/api.response';
+import { PostRequest } from '../../shared/models/request/post.request';
+import { ApiResponse } from '../../shared/models/api.response';
 
 @Injectable({
   providedIn: 'root'

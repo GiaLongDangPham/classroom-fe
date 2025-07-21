@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { PostResponse } from '../../../../models/response/post.response';
+import { PostResponse } from '../../../../shared/models/response/post.response';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TimeAgoPipe } from '../../../../pipes/time-ago.pipe';
-import { PostInteractionService } from '../../../../services/post-interaction.service';
-import { UserResponse } from '../../../../models/response/user.response';
-import { PostCommentResponse } from '../../../../models/response/post-comment.response';
-import { AvatarComponent } from '../../../shared/avatar/avatar.component';
+import { TimeAgoPipe } from '../../../../core/pipes/time-ago.pipe';
+import { PostInteractionService } from '../../../../core/services/post-interaction.service';
+import { UserResponse } from '../../../../shared/models/response/user.response';
+import { PostCommentResponse } from '../../../../shared/models/response/post-comment.response';
+import { AvatarComponent } from '../../../../shared/avatar/avatar.component';
 @Component({
   selector: 'app-post',
   standalone: true,

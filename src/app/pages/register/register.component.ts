@@ -8,8 +8,8 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { AuthRequest } from '../../models/request/auth-request.model';
+import { AuthService } from '../../core/services/auth.service';
+import { AuthRequest } from '../../shared/models/request/auth-request.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

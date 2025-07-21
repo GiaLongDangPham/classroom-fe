@@ -2,12 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ClassroomService } from '../../../services/classroom.service';
+import { ClassroomService } from '../../../core/services/classroom.service';
 import { FormsModule } from '@angular/forms';
-import { ApiResponse } from '../../../models/api.response';
-import { AuthService } from '../../../services/auth.service';
-import { UserResponse } from '../../../models/response/user.response';
-import { ClassroomRequest } from '../../../models/request/classroom.model';
+import { ApiResponse } from '../../../shared/models/api.response';
+import { AuthService } from '../../../core/services/auth.service';
+import { UserResponse } from '../../../shared/models/response/user.response';
+import { ClassroomRequest } from '../../../shared/models/request/classroom.model';
 
 @Component({
   selector: 'app-classroom-list',

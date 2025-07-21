@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { ClassroomRequest } from '../models/request/classroom.model';
-import { ApiResponse } from '../models/api.response';
-import { ClassroomResponse } from '../models/response/classroom.response';
+import { ClassroomRequest } from '../../shared/models/request/classroom.model';
+import { ApiResponse } from '../../shared/models/api.response';
 
 @Injectable({
   providedIn: 'root'

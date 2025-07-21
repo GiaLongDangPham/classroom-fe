@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit , OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ChatService } from '../../../services/chat.service';
-import { ChatMessageResponse } from '../../../models/response/chat-message.response';
-import { ClassroomResponse } from '../../../models/response/classroom.response';
-import { UserResponse } from '../../../models/response/user.response';
+import { ChatService } from '../../../core/services/chat.service';
+import { ChatMessageResponse } from '../../../shared/models/response/chat-message.response';
+import { ClassroomResponse } from '../../../shared/models/response/classroom.response';
+import { UserResponse } from '../../../shared/models/response/user.response';
 import { Subscription } from 'rxjs';
-import { AvatarComponent } from '../../shared/avatar/avatar.component';
+import { AvatarComponent } from '../../../shared/avatar/avatar.component';
 
 @Component({
   selector: 'app-message-detail',

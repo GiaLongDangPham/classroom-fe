@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MessageListComponent } from '../message-list/message-list.component';
 import { MessageDetailComponent } from '../message-detail/message-detail.component';
-import { ClassroomResponse } from '../../../models/response/classroom.response';
-import { UserResponse } from '../../../models/response/user.response';
-import { UserService } from '../../../services/user.service';
+import { ClassroomResponse } from '../../../shared/models/response/classroom.response';
+import { UserResponse } from '../../../shared/models/response/user.response';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-message-page',

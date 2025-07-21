@@ -1,17 +1,17 @@
 import { Component, OnInit  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClassroomService } from '../../../services/classroom.service';
+import { ClassroomService } from '../../../core/services/classroom.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { PostComponent } from './post/post.component';
-import { PostResponse } from '../../../models/response/post.response';
-import { PostService } from '../../../services/post.service';
-import { ApiResponse } from '../../../models/api.response';
-import { ClassroomResponse } from '../../../models/response/classroom.response';
-import { AvatarComponent } from "../../shared/avatar/avatar.component";
-import { UserResponse } from '../../../models/response/user.response';
-import { UserService } from '../../../services/user.service';
+import { PostResponse } from '../../../shared/models/response/post.response';
+import { PostService } from '../../../core/services/post.service';
+import { ApiResponse } from '../../../shared/models/api.response';
+import { ClassroomResponse } from '../../../shared/models/response/classroom.response';
+import { AvatarComponent } from '../../../shared/avatar/avatar.component';
+import { UserResponse } from '../../../shared/models/response/user.response';
+import { UserService } from '../../../core/services/user.service';
 import { ChatComponent } from './chat/chat.component';
 
 @Component({

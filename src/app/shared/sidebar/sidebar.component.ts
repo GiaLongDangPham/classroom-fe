@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UserResponse } from '../../models/response/user.response';
-import { AuthService } from '../../services/auth.service';
-import { ApiResponse } from '../../models/api.response';
+import { UserResponse } from '../models/response/user.response';
+import { AuthService } from '../../core/services/auth.service';
+import { ApiResponse } from '../models/api.response';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-sidebar',

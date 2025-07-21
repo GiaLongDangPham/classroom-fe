@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ChatMessageResponse } from '../../../../models/response/chat-message.response';
-import { UserResponse } from '../../../../models/response/user.response';
-import { ChatService } from '../../../../services/chat.service';
-import { AvatarComponent } from '../../../shared/avatar/avatar.component';
+import { ChatMessageResponse } from '../../../../shared/models/response/chat-message.response';
+import { UserResponse } from '../../../../shared/models/response/user.response';
+import { ChatService } from '../../../../core/services/chat.service';
+import { AvatarComponent } from '../../../../shared/avatar/avatar.component';
 import { Subscription } from 'rxjs';
 
 @Component({

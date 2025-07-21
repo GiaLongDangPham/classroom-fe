@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, Input, SimpleChanges, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
-import { ClassroomResponse } from '../../../models/response/classroom.response';
-import { ClassroomService } from '../../../services/classroom.service';
-import { ApiResponse } from '../../../models/api.response';
+import { ClassroomResponse } from '../../../shared/models/response/classroom.response';
+import { ClassroomService } from '../../../core/services/classroom.service';
+import { ApiResponse } from '../../../shared/models/api.response';
 
 @Component({
   selector: 'app-message-list',

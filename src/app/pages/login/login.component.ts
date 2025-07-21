@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { AuthRequest } from '../../models/request/auth-request.model';
+import { AuthService } from '../../core/services/auth.service';
+import { AuthRequest } from '../../shared/models/request/auth-request.model';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../services/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ApiResponse } from '../../models/api.response';
+import { UserService } from '../../core/services/user.service';
+import { ApiResponse } from '../../shared/models/api.response';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -57,7 +56,7 @@ export class LoginComponent {
 
     this.authService.login(loginDTO).subscribe({
       next: (response: ApiResponse) => {
-        console.log('🔑 Login response:', response);
+        console.log('Login response:', response);
         this.loading = false;
         
         if (!response.data?.token) {
@@ -66,7 +65,7 @@ export class LoginComponent {
         }
         
         this.authService.setToken(response.data.token);
-        console.log('🔑 Token saved:', localStorage.getItem('token'));
+        console.log('Token saved:', localStorage.getItem('token'));
 
         this.authService.getMyProfile().subscribe({
           next: (res: ApiResponse) => {  

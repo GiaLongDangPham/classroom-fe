@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PostCommentResponse } from '../models/response/post-comment.response';
-import { PostResponse } from '../models/response/post.response';
+import { PostCommentResponse } from '../../shared/models/response/post-comment.response';
+import { PostResponse } from '../../shared/models/response/post.response';
 
 
 @Injectable({

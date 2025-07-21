@@ -1,6 +1,6 @@
-import { Component, OnInit  } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { ApiResponse } from '../../models/api.response';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../core/services/auth.service';
+import { ApiResponse } from '../models/api.response';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -18,12 +18,14 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // debugger
-    // console.log('>>>>>>>>>>>>>userResponse', userResponse);
     setTimeout(() => {
-      const userResponseJSON = localStorage.getItem('user'); 
-      const userResponse = JSON.parse(userResponseJSON!);  
-      this.userFullName = `${userResponse?.firstName} ${userResponse?.lastName}`;
+      if (typeof localStorage !== 'undefined') {
+        const userResponseJSON = localStorage.getItem('user'); 
+        if (userResponseJSON) {
+          const userResponse = JSON.parse(userResponseJSON);  
+          this.userFullName = `${userResponse?.firstName} ${userResponse?.lastName}`;
+        }
+      }
     }, 100);
   }
 

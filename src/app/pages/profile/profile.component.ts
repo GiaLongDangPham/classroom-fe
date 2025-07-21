@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../services/user.service';
-import { AuthService } from '../../services/auth.service';
-import { ApiResponse } from '../../models/api.response';
-import { UserResponse } from '../../models/response/user.response';
+import { UserService } from '../../core/services/user.service';
+import { AuthService } from '../../core/services/auth.service';
+import { ApiResponse } from '../../shared/models/api.response';
+import { UserResponse } from '../../shared/models/response/user.response';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AvatarComponent } from '../shared/avatar/avatar.component';
+import { AvatarComponent } from '../../shared/avatar/avatar.component';
 @Component({
   selector: 'app-profile',
   standalone: true,

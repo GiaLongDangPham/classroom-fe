@@ -35,9 +35,6 @@ export class LoginComponent {
     private userService: UserService
   ) {}
 
-  ngOnInit() {
-  }
-
   onSubmit() {
     this.loading = true;
 
@@ -56,7 +53,6 @@ export class LoginComponent {
 
     this.authService.login(loginDTO).subscribe({
       next: (response: ApiResponse) => {
-        console.log('Login response:', response);
         this.loading = false;
         
         if (!response.data?.token) {
@@ -65,11 +61,9 @@ export class LoginComponent {
         }
         
         this.authService.setToken(response.data.token);
-        console.log('Token saved:', localStorage.getItem('token'));
 
         this.authService.getMyProfile().subscribe({
           next: (res: ApiResponse) => {  
-            console.log('👤 Profile response:', res);
             const user = res.data;
             if(!user) {
               this.toastr.error('Không lấy được thông tin người dùng');
@@ -78,22 +72,12 @@ export class LoginComponent {
 
             // Save the JSON string to local storage with a key (e.g., "userResponse")
             this.userService.saveToLocalStorage(user);
-            console.log('👤 User saved to localStorage:', localStorage.getItem('user'));
             
             this.toastr.success('Đăng nhập thành công!');
             
-            console.log('🚀 Navigating to /classroom...');
-            this.router.navigate(['/classroom']).then(
-              (success) => {
-                console.log('🚀 Navigation success:', success);
-              },
-              (error) => {
-                console.error('🚀 Navigation error:', error);
-              }
-            );
+            this.router.navigate(['/classroom']);
           },
           error: (error) => {
-            console.error('👤 Profile error:', error);
             this.loading = false;
             this.toastr.error('Không lấy được thông tin người dùng');
           } 

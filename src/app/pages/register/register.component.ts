@@ -42,7 +42,6 @@ export class RegisterComponent {
     private toastr: ToastrService
   ) {}
 
-  // Validator để đảm bảo password và confirmPassword giống nhau
   matchPasswords(group: AbstractControl): ValidationErrors | null {
     const password = group.get('password')?.value;
     const confirm = group.get('confirmPassword')?.value;

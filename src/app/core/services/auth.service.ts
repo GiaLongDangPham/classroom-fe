@@ -38,16 +38,11 @@ export class AuthService {
   }
 
   setToken(token: string) {
-    console.log('🔑 Setting token:', token);
-    console.log('🔑 Window check:', typeof window);
-    
     if (typeof window === 'undefined') {
-      console.log('🔑 Window undefined, skipping localStorage');
       return; // SSR check
     }
     
     localStorage.setItem('token', token);
-    console.log('🔑 Token saved successfully:', localStorage.getItem('token'));
   }
 
   logout() {

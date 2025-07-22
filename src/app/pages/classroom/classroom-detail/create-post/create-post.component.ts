@@ -106,7 +106,7 @@ export class CreatePostComponent {
         this.isUploading = false;
 
         window.location.reload(); // Tải lại trang để hiển thị bài viết mới
-        this.postCreated.emit(); // 👈 báo cho component cha biết đã đăng xong
+        this.postCreated.emit(); // báo cho component cha biết đã đăng xong
       },
       error: (err) => {
         debugger

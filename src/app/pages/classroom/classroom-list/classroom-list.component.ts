@@ -62,9 +62,24 @@ export class ClassroomListComponent implements OnInit {
         this.loading = false;
       }
     });
-
-    
   }
+  
+    onCreateClass(): void {
+      if(this.currentUser.role !== 'TEACHER') {
+        this.toastr.error('Chỉ giáo viên mới có thể tạo lớp học');
+        return;
+      }
+      this.classroomService.createClass(this.createdClass).subscribe({
+        next: (response: ApiResponse) => {
+          this.toastr.success('Tạo lớp học thành công!');
+          this.fetchMyClasses();
+          this.createdClass = { name: '', description: '' }; // Reset form
+        },
+        error: (error) => {
+          this.toastr.error('Không thể tạo lớp học: ' + (error.error?.message || 'Lỗi không xác định'));
+        }
+      });
+    }
 
   goToClassroom(id: number) {
     this.router.navigate(['/classroom', id]);
@@ -84,24 +99,6 @@ export class ClassroomListComponent implements OnInit {
       },
       error: () => {
         this.toastr.error('Mã lớp không hợp lệ hoặc đã tham gia lớp này');
-      }
-    });
-  }
-
-  onCreateClass(): void {
-    debugger
-    if(this.currentUser.role !== 'TEACHER') {
-      this.toastr.error('Chỉ giáo viên mới có thể tạo lớp học');
-      return;
-    }
-    this.classroomService.createClass(this.createdClass).subscribe({
-      next: (response: ApiResponse) => {
-        this.toastr.success('Tạo lớp học thành công!');
-        this.fetchMyClasses();
-        this.createdClass = { name: '', description: '' }; // Reset form
-      },
-      error: (error) => {
-        this.toastr.error('Không thể tạo lớp học: ' + (error.error?.message || 'Lỗi không xác định'));
       }
     });
   }

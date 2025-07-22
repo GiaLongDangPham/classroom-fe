@@ -3,14 +3,14 @@
     <!-- Nút quay lại + Rời lớp -->
     <div class="flex items-center justify-between">
       <button (click)="goBack()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition">
-        ← Quay lại danh sách lớp
+        <i class="fa-solid fa-arrow-left"></i> Quay lại danh sách lớp
       </button>
       <button (click)="leaveOrDelete()" class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition">
         {{ isCreator ? 'Xoá lớp học' : 'Rời lớp học' }}
       </button>
     </div>
 
-    <!-- Accordion thông tin lớp -->
+    <!-- thông tin lớp -->
     <details class="bg-white rounded-xl shadow">
       <summary class="cursor-pointer px-6 py-4 text-xl font-semibold text-blue-600">Thông tin lớp học</summary>
       <div class="p-6 space-y-2">
@@ -20,7 +20,7 @@
       </div>
     </details>
 
-    <!-- Accordion thành viên -->
+    <!-- thành viên -->
     <details class="bg-white rounded-xl shadow">
       <summary class="cursor-pointer px-6 py-4 text-xl font-semibold text-gray-800">
         Thành viên ({{ classroom.members?.length || 0 }})

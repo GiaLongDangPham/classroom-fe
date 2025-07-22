@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { ClassroomRequest } from '../../shared/models/request/classroom.model';
@@ -14,7 +13,6 @@ export class ClassroomService {
   
   constructor(
     private http: HttpClient, 
-    private router: Router
   ) { }
 
   // POST /create

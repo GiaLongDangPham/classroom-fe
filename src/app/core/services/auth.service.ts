@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { AuthRequest } from '../../shared/models/request/auth-request.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ApiResponse } from '../../shared/models/api.response';
+import { AuthResponse } from '../../shared/models/response/auth.response';
 
 
 @Injectable({
@@ -25,6 +26,19 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/register`, request);
   }
 
+  refreshToken(): Observable<AuthResponse> {
+    const refreshToken = this.getRefreshToken();
+    return this.http.post<AuthResponse>(
+      `${this.baseUrl}/refresh-token`, 
+      {refreshToken} 
+    ).pipe(
+      tap((res) => {
+        this.setToken(res.token);
+        this.setRefreshToken(res.refreshToken); // nếu có thay mới
+      })
+    );
+  }
+
   getMyProfile(): Observable<ApiResponse> {
     return this.http.get(`${this.baseUrl}/me`);
   }
@@ -32,22 +46,29 @@ export class AuthService {
   getToken(): string | null {
     if (typeof window === 'undefined') return null; // SSR check
     
-    const token = localStorage.getItem('token');
-    console.log('🔑 Getting token:', token);
-    return token;
+    return localStorage.getItem('token');
+  }
+
+  getRefreshToken(): string | null {
+    if (typeof window === 'undefined') return null; // SSR check
+
+    return localStorage.getItem('refreshToken');
   }
 
   setToken(token: string) {
-    if (typeof window === 'undefined') {
-      return; // SSR check
-    }
-    
+    if (typeof window === 'undefined') return;
     localStorage.setItem('token', token);
+  }
+
+  setRefreshToken(refreshToken: string) {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('refreshToken', refreshToken);
   }
 
   logout() {
     if (typeof window === 'undefined') return; // 👈 chống lỗi SSR
     localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }

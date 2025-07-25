@@ -114,6 +114,13 @@ export class ClassroomDetailComponent implements OnInit{
 
   onCancelClick(){
     this.isCreatingPost = false;
+  }
 
+  onPostCommentCountChanged(postId: number | undefined, newCount: number) {
+    // Log để track comment count changes
+    console.log(`Post ${postId} comment count updated to: ${newCount}`);
+    
+    // Có thể thêm logic khác như update cache, analytics, etc.
+    // Ví dụ: gửi event tracking, cập nhật local storage, etc.
   }
 }

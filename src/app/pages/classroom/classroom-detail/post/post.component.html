@@ -35,95 +35,11 @@
   </div>
 
 
-  <!-- Khung bình luận -->
-  <div *ngIf="isShowComments" class="pt-3 border-t mt-2 space-y-2" (click)="closeCommentMenu()">
-    <!-- Danh sách bình luận -->
-    <div *ngFor="let comment of visibleComments" class="flex items-start gap-3 bg-gray-50 p-3 rounded-xl shadow-sm">
+  <app-comment-button 
+    [postId]="post.id!" 
+    [userId]="user.id!" 
+    [isShowComments]="isShowComments"
+    [commentCount]="commentCount"
+  ></app-comment-button>
 
-      <app-avatar 
-        [user]="{ avatarUrl: comment.avatarUrl }" 
-        [isAllowUpload]="false"
-        [width]="'w-8'"
-        [height]="'h-8'"
-      ></app-avatar>
-
-      <div class="flex-1">
-        <!-- Normal comment display -->
-        <div *ngIf="editingCommentId !== comment.id" class="bg-white rounded-xl px-4 py-2 shadow text-sm">
-          <div class="bg-white rounded-xl px-4 py-2 shadow text-sm max-w-[85%] break-words">
-            <span class="font-semibold text-gray-800">{{ comment.createdBy }}</span>
-            <span class="text-gray-700 break-words">: {{ comment.content }}</span>
-          </div>
-          
-          <!-- Three dots menu (only for own comments) -->
-          <div *ngIf="isMyComment(comment)" class="mt-1 relative">
-            <button 
-              (click)="toggleCommentMenu(comment.id!); $event.stopPropagation()" 
-              class="text-gray-400 hover:text-gray-600 p-1 menu-button">
-              <i class="fas fa-ellipsis-h"></i>
-            </button>
-            
-            <!-- Dropdown menu -->
-            <div *ngIf="openCommentMenuId === comment.id" 
-                 class="absolute left-6 top-0 bg-white border rounded-md shadow-lg z-10 min-w-[120px] dropdown-menu"
-                 (click)="$event.stopPropagation()">
-              <button 
-                (click)="startEditComment(comment)"
-                class="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                <i class="fas fa-edit mr-2"></i>Chỉnh sửa
-              </button>
-              <button 
-                (click)="deleteComment(comment.id!)"
-                class="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-100 delete-button">
-                <i class="fas fa-trash mr-2"></i>Xóa
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Edit comment form -->
-        <div *ngIf="editingCommentId === comment.id" class="bg-white rounded-xl px-4 py-2 shadow text-sm">
-          <div class="flex items-center edit-buttons">
-            <input 
-              type="text" 
-              [(ngModel)]="editingCommentText" 
-              class="flex-1 border rounded px-2 py-1 text-sm edit-comment-input"
-              (keyup.enter)="saveEditComment(comment.id!)"
-              (keyup.escape)="cancelEditComment()"
-              placeholder="Nhập bình luận..."
-              #editInput>
-            <button 
-              (click)="saveEditComment(comment.id!)"
-              class="bg-blue-500 text-white px-2 py-1 rounded text-xs hover:bg-blue-600">
-              Lưu
-            </button>
-            <button 
-              (click)="cancelEditComment()"
-              class="bg-gray-500 text-white px-2 py-1 rounded text-xs hover:bg-gray-600">
-              Hủy
-            </button>
-          </div>
-        </div>
-        
-        <!-- Timestamp -->
-        <div class="text-xs text-gray-500 mt-1 pl-1">{{ comment.createdAt | timeAgo }}</div>
-        
-      </div>
-    </div>
-
-
-    <!-- Nút Xem thêm bình luận -->
-    <button *ngIf="allComments && allComments.length > visibleComment"
-            (click)="showMoreComments()"
-            class="flex items-center gap-2 text-gray-600 hover:text-blue-600 text-sm px-3 py-1 mt-2 rounded-full bg-gray-100 hover:bg-blue-100 transition duration-200">
-      <i class="fa-regular fa-comment"></i>
-      <span>Xem thêm bình luận</span>
-    </button>
-
-    <!-- Form nhập bình luận -->
-    <div class="flex items-center gap-2">
-      <input type="text" [(ngModel)]="newComment" placeholder="Viết bình luận..." class="flex-1 border px-3 py-1 rounded-full text-sm" />
-      <button class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-600" (click)="submitComment()">Gửi</button>
-    </div>
-  </div>
 </div>

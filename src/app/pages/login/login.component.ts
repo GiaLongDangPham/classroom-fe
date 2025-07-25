@@ -35,6 +35,10 @@ export class LoginComponent {
     private userService: UserService
   ) {}
 
+  ngOnInit() {
+    if (typeof window !== 'undefined') localStorage.clear(); // Xóa localStorage khi vào trang login
+  }
+
   onSubmit() {
     this.loading = true;
 
@@ -55,12 +59,13 @@ export class LoginComponent {
       next: (response: ApiResponse) => {
         this.loading = false;
         
-        if (!response.data?.token) {
-          this.toastr.error('Không nhận được token từ server');
+        if (!response.data?.token || !response.data?.refreshToken) {
+          this.toastr.error('Không nhận được token hoặc refreshToken từ server');
           return;
         }
         
         this.authService.setToken(response.data.token);
+        this.authService.setRefreshToken(response.data.refreshToken);
 
         this.authService.getMyProfile().subscribe({
           next: (res: ApiResponse) => {  

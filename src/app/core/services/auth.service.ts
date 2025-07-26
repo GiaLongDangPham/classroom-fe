@@ -35,6 +35,7 @@ export class AuthService {
       tap((res) => {
         this.setToken(res.token);
         this.setRefreshToken(res.refreshToken); // nếu có thay mới
+        console.log('Token refreshed successfully');
       })
     );
   }

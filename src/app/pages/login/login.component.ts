@@ -35,9 +35,9 @@ export class LoginComponent {
     private userService: UserService
   ) {}
 
-  ngOnInit() {
-    if (typeof window !== 'undefined') localStorage.clear(); // Xóa localStorage khi vào trang login
-  }
+  // ngOnInit() {
+  //   if (typeof window !== 'undefined') localStorage.clear(); // Xóa localStorage khi vào trang login
+  // }
 
   onSubmit() {
     this.loading = true;

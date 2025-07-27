@@ -21,7 +21,7 @@ export class MessagePageComponent implements OnInit {
 
   selectedClassroom?: ClassroomResponse;
   currentUser: UserResponse = {};
-  lastMessageUpdate?: { classroomId: number; content: string };
+  lastMessageUpdate?: { classroomId: number; content: string; timestamp?: Date };
 
   constructor(
     private userService: UserService
@@ -36,9 +36,8 @@ export class MessagePageComponent implements OnInit {
   }
 
   handleNewMessage(data: { classroomId: number, content: string }) {
-    console.log('Handling new message:', data); // Debug log
-    // Tạo object mới để ngOnChanges detect được thay đổi
-    this.lastMessageUpdate = { ...data, timestamp: Date.now() } as any;
+    // Tạo object mới để ngOnChanges được thay đổi
+    this.lastMessageUpdate = { ...data, timestamp: new Date() };
   }
 
 }

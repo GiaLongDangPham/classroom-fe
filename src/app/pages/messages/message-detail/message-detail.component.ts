@@ -34,10 +34,8 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    // Gọi API get message by classId
     this.loadMessages();
     this.connectToWebSocket();
-    
   }
 
   ngOnDestroy(): void {
@@ -70,10 +68,8 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
     if (!this.classroom || !this.classroom.id) return;
     const classroomId = this.classroom.id; // Store the id to avoid undefined issues
     this.chatService.connect(classroomId);
-    this.messagesSub = this.chatService.message$.subscribe((msg) => {
-      debugger
+    this.messagesSub = this.chatService.message$.subscribe((msg: ChatMessageResponse | null) => {
       if (!msg) return;
-      
       // Kiểm tra xem message đã tồn tại chưa (tránh duplicate từ optimistic update)
       const isDuplicate = this.messages.some(existingMsg => 
         existingMsg.content === msg.content && 
@@ -92,7 +88,6 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
           });
         }
       }
-
       setTimeout(() => this.scrollToBottom(), 50);
     });
   }

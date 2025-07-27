@@ -9,4 +9,5 @@ export interface ClassroomResponse {
   members?: MemberResponse[];
 
   lastMessage?: string;
+  lastMessageTimestamp?: Date;
 }

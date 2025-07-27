@@ -8,5 +8,8 @@
     <div class="last-message">
       {{ c.lastMessage || 'Chưa có tin nhắn' }}
     </div>
+    <div *ngIf="c.lastMessageTimestamp" class="timestamp">
+      {{ c.lastMessageTimestamp | timeAgo }}
+    </div>
   </div>
 </div>

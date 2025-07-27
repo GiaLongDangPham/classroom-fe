@@ -3,12 +3,14 @@ import { Component, EventEmitter, Output, Input, SimpleChanges, OnInit, OnChange
 import { ClassroomResponse } from '../../../shared/models/response/classroom.response';
 import { ClassroomService } from '../../../core/services/classroom.service';
 import { ApiResponse } from '../../../shared/models/api.response';
+import { TimeAgoPipe } from '../../../core/pipes/time-ago.pipe';
 
 @Component({
   selector: 'app-message-list',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    TimeAgoPipe
   ],
   templateUrl: './message-list.component.html',
   styleUrl: './message-list.component.scss'
@@ -18,9 +20,7 @@ export class MessageListComponent implements OnInit, OnChanges {
   @Output() openChat = new EventEmitter<ClassroomResponse>();
   @Input() selectedClassroom?: ClassroomResponse;
   @Input() updatedMessage?: { classroomId: number, content: string };
-
   classList: ClassroomResponse[] = [];
-
 
   constructor(
     private classroomService: ClassroomService,
@@ -28,27 +28,23 @@ export class MessageListComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    // Gọi API lấy danh sách lớp học đã tham gia và tin nhắn cuối
     this.loadClassrooms();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['updatedMessage'] && this.updatedMessage) {
-      console.log('Received updated message:', this.updatedMessage); // Debug log
       const { classroomId, content } = this.updatedMessage;
       
       // Tìm index của classroom cần update
       const classIndex = this.classList.findIndex(c => c.id === classroomId);
       if (classIndex !== -1) {
-        // Tạo array mới để trigger change detection
+        // Tìm lớp học và cập nhật lastMessage và lastMessageTimestamp
         this.classList = this.classList.map((classroom, index) => {
           if (index === classIndex) {
-            return { ...classroom, lastMessage: content };
+            return { ...classroom, lastMessage: content, lastMessageTimestamp: new Date() }; // Cập nhật lastMessage và timestamp
           }
           return classroom;
         });
-        console.log('Updated classList:', this.classList); // Debug log
-        
         // Force change detection
         this.cdr.detectChanges();
       }

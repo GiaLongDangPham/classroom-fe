@@ -29,6 +29,10 @@
     .last-message {
       color: #dbeafe;
     }
+
+    .timestamp{
+      color: #dbeafe;
+    }
   }
   
   &.default {
@@ -55,6 +59,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.timestamp{
+  font-size: 0.75rem;
+  color: #6b7280;
 }
 
 /* Scrollbar styling */

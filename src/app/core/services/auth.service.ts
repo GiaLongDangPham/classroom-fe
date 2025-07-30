@@ -26,6 +26,25 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/register`, request);
   }
 
+  
+  logout() {
+    if (typeof window === 'undefined') return;
+    const accessToken = this.getToken();
+    this.http.post(`${this.baseUrl}/logout`, { accessToken }).subscribe({
+      next: () => {
+        console.log('Logged out successfully');
+      },
+      error: (err) => {
+        console.error('Logout failed', err);
+      }
+    });
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('user');
+    
+    this.router.navigate(['/login']);
+  }
+
   refreshToken(): Observable<AuthResponse> {
     const refreshToken = this.getRefreshToken();
     return this.http.post<AuthResponse>(
@@ -64,14 +83,6 @@ export class AuthService {
   setRefreshToken(refreshToken: string) {
     if (typeof window === 'undefined') return;
     localStorage.setItem('refreshToken', refreshToken);
-  }
-
-  logout() {
-    if (typeof window === 'undefined') return; // 👈 chống lỗi SSR
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {

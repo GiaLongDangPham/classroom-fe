@@ -75,11 +75,8 @@ export class LoginComponent {
               return;
             }
 
-            // Save the JSON string to local storage with a key (e.g., "userResponse")
             this.userService.saveToLocalStorage(user);
-            
             this.toastr.success('Đăng nhập thành công!');
-            
             this.router.navigate(['/classroom']);
           },
           error: (error) => {
@@ -94,5 +91,11 @@ export class LoginComponent {
         this.toastr.error('Sai tên đăng nhập hoặc mật khẩu');
       }
     });
+  }
+
+  loginWithGoogle(){
+  }
+
+  loginWithFacebook(){
   }
 }

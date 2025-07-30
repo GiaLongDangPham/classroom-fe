@@ -107,8 +107,4 @@ export class ClassroomListComponent implements OnInit {
     this.joinCode = code;
     this.onJoinClass();
   }
-
-  logout() {
-    this.authService.logout();
-  }
 }

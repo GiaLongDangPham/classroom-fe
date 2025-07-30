@@ -34,7 +34,33 @@
       </button>
     </form>
 
-    <p class="text-sm text-gray-500 text-center mt-4">
+    <!-- Separator -->
+    <div class="flex items-center my-4">
+      <hr class="flex-grow border-gray-300" />
+      <span class="mx-3 text-gray-400 text-sm">hoặc</span>
+      <hr class="flex-grow border-gray-300" />
+    </div>
+
+    <!-- Social login buttons -->
+    <div class="space-y-3">
+      <button
+        (click)="loginWithGoogle()"
+        class="w-full flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-xl hover:bg-gray-100 transition"
+      >
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5" />
+        <span>Đăng nhập bằng Google</span>
+      </button>
+
+      <button
+        (click)="loginWithFacebook()"
+        class="w-full flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-xl hover:bg-gray-100 transition"
+      >
+        <img src="https://www.svgrepo.com/show/448224/facebook.svg" alt="Facebook" class="w-5 h-5" />
+        <span>Đăng nhập bằng Facebook</span>
+      </button>
+    </div>
+
+    <p class="text-sm text-gray-500 text-center mt-6">
       Chưa có tài khoản?
       <a routerLink="/register" class="text-blue-600 hover:underline">Đăng ký</a>
     </p>

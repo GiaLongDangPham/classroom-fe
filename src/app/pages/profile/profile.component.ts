@@ -7,13 +7,15 @@ import { UserResponse } from '../../shared/models/response/user.response';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
-    AvatarComponent
+    AvatarComponent,
+    TranslateModule
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'

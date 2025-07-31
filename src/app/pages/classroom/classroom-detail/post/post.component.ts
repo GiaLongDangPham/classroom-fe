@@ -8,6 +8,7 @@ import { UserResponse } from '../../../../shared/models/response/user.response';
 import { PostCommentResponse } from '../../../../shared/models/response/post-comment.response';
 import { PostLikeResponse } from '../../../../shared/models/response/post-like.response';
 import { CommentButtonComponent } from "./comment-button/comment-button.component";
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-post',
   standalone: true,
@@ -15,7 +16,8 @@ import { CommentButtonComponent } from "./comment-button/comment-button.componen
     CommonModule,
     FormsModule,
     TimeAgoPipe,
-    CommentButtonComponent
+    CommentButtonComponent,
+    TranslateModule
 ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'

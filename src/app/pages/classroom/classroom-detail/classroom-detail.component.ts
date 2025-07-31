@@ -13,6 +13,7 @@ import { AvatarComponent } from '../../../shared/avatar/avatar.component';
 import { UserResponse } from '../../../shared/models/response/user.response';
 import { UserService } from '../../../core/services/user.service';
 import { ChatComponent } from './chat/chat.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-classroom-detail',
@@ -22,7 +23,8 @@ import { ChatComponent } from './chat/chat.component';
     CreatePostComponent,
     PostComponent,
     AvatarComponent,
-    ChatComponent
+    ChatComponent,
+    TranslateModule
 ],
   templateUrl: './classroom-detail.component.html',
   styleUrl: './classroom-detail.component.scss'
@@ -53,19 +55,8 @@ export class ClassroomDetailComponent implements OnInit{
     this.user = this.userService.getUserFromLocalStorage() || {}; // Lấy user từ localStorage
 
     this.classroomId = Number(this.route.snapshot.paramMap.get('id'));
-    this.classroomService.getClassDetail(this.classroomId).subscribe({
-      next: (res: ApiResponse) => {
-        debugger
-        this.classroom = res.data;
-        this.isCreator = `${this.user.firstName} ${this.user.lastName}` == res.data.createdBy;
-        this.loading = false;
-      },
-      error: () => {
-        this.toastr.error('Không thể tải thông tin lớp học');
-        this.loading = false;
-      }
-    });
-
+    
+    this.getClassDetail();
     this.loadPosts();
   }
 
@@ -77,6 +68,21 @@ export class ClassroomDetailComponent implements OnInit{
       error: () => {
         debugger
         this.toastr.error('Không thể tải bài viết');
+      }
+    });
+  }
+
+  getClassDetail() {
+    this.classroomService.getClassDetail(this.classroomId).subscribe({
+      next: (res: ApiResponse) => {
+        debugger
+        this.classroom = res.data;
+        this.isCreator = `${this.user.firstName} ${this.user.lastName}` == res.data.createdBy;
+        this.loading = false;
+      },
+      error: () => {
+        this.toastr.error('Không thể tải thông tin lớp học');
+        this.loading = false;
       }
     });
   }

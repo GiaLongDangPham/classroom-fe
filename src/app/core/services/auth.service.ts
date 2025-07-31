@@ -3,9 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { AuthRequest } from '../../shared/models/request/auth-request.model';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ApiResponse } from '../../shared/models/api.response';
 import { AuthResponse } from '../../shared/models/response/auth.response';
+import { UserService } from './user.service';
 
 
 @Injectable({
@@ -13,23 +14,32 @@ import { AuthResponse } from '../../shared/models/response/auth.response';
 })
 export class AuthService {
   private baseUrl = environment.apiBaseUrl + '/auth';
+
+  private isLoggedInSubject = new BehaviorSubject<boolean>(!!this.getToken());
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
   constructor(
     private http: HttpClient, 
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) { }
 
   login(request: AuthRequest): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${this.baseUrl}/login`, request);
   }
 
+  outboundAuthenticate(code: String): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${this.baseUrl}/outbound/authentication?code=${code}`, {});
+  }
+
   register(request: AuthRequest): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, request);
   }
-
   
   logout() {
     if (typeof window === 'undefined') return;
     const accessToken = this.getToken();
+    this.isLoggedInSubject.next(false); // Update login state
     this.http.post(`${this.baseUrl}/logout`, { accessToken }).subscribe({
       next: () => {
         console.log('Logged out successfully');
@@ -40,8 +50,8 @@ export class AuthService {
     });
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
-    
+    this.userService.deleteUserFromLocalStorage(); // Clear user data
+
     this.router.navigate(['/login']);
   }
 
@@ -85,6 +95,10 @@ export class AuthService {
     localStorage.setItem('refreshToken', refreshToken);
   }
 
+  setLoggedIn(value: boolean): void {
+    this.isLoggedInSubject.next(value);
+  }
+  
   isLoggedIn(): boolean {
     return !!this.getToken();
   }

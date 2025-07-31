@@ -5,6 +5,7 @@ import { AvatarComponent } from '../../../../../shared/avatar/avatar.component';
 import { PostInteractionService } from '../../../../../core/services/post-interaction.service';
 import { PostCommentResponse } from '../../../../../shared/models/response/post-comment.response';
 import { TimeAgoPipe } from '../../../../../core/pipes/time-ago.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-comment-button',
@@ -13,7 +14,8 @@ import { TimeAgoPipe } from '../../../../../core/pipes/time-ago.pipe';
     CommonModule,
     FormsModule,
     AvatarComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    TranslateModule
   ],
   templateUrl: './comment-button.component.html',
   styleUrl: './comment-button.component.scss'

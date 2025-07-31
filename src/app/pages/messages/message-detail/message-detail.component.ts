@@ -7,6 +7,7 @@ import { ClassroomResponse } from '../../../shared/models/response/classroom.res
 import { UserResponse } from '../../../shared/models/response/user.response';
 import { Subscription } from 'rxjs';
 import { AvatarComponent } from '../../../shared/avatar/avatar.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-message-detail',
@@ -14,7 +15,8 @@ import { AvatarComponent } from '../../../shared/avatar/avatar.component';
   imports: [
     CommonModule,
     FormsModule,
-    AvatarComponent
+    AvatarComponent,
+    TranslateModule
   ],
   templateUrl: './message-detail.component.html',
   styleUrl: './message-detail.component.scss'

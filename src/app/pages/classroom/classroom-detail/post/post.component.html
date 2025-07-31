@@ -20,17 +20,17 @@
   <div class="flex items-center justify-around text-gray-600 border-t pt-3">
     <button class="flex items-center gap-1 hover:text-red-500 transition" (click)="onLike()">
       <i class="fa" [ngClass]="isLiked ? 'fa-solid fa-heart text-red-500' : 'fa-regular fa-heart'"></i>
-      <span>{{ likeCount }} Thích</span>
+      <span>{{ likeCount }} {{ 'POST.LIKE' | translate }}</span>
     </button>
 
     <button class="flex items-center gap-1 hover:text-blue-500 transition" (click)="toggleComment()">
       <i class="fa-regular fa-comment"></i>
-      <span>{{ commentCount }} Bình luận</span>
+      <span>{{ commentCount }} {{ 'POST.COMMENT' | translate }}</span>
     </button>
 
     <button class="flex items-center gap-1 hover:text-green-500 transition" (click)="onShare(post)">
       <i class="fa-solid fa-share"></i>
-      <span>Chia sẻ</span>
+      <span>{{ 'POST.SHARE' | translate }}</span>
     </button>
   </div>
 

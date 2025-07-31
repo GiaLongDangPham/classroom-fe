@@ -1,0 +1,108 @@
+{
+  "HEADER": {
+    "LANGUAGE": "Language",
+    "VIETNAMESE": "Vietnamese",
+    "ENGLISH": "English",
+    "SIGN-OUT": "Sign Out",
+    "SIGN-IN": "Sign In"
+  },
+  "SIDEBAR": {
+    "CLASSROOM": "Classroom",
+    "PROFILE": "Profile",
+    "MESSAGES": "Messages",
+    "LOGIN-BY": "Logged in by:"
+  },
+  "LOGIN": {
+    "WELCOME-BACK": "Welcome Back!",
+    "SIGN-IN": "Sign In",
+    "SIGN-UP": "Sign Up",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "OR": "OR",
+    "SIGN-IN-FACEBOOK": "Sign In with Facebook",
+    "SIGN-IN-GOOGLE": "Sign In with Google",
+    "NO_ACCOUNT": "You don't have an account?"
+  },
+  "REGISTER": {
+    "TITLE": "Create Your Account",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "CONFIRM-PASSWORD": "Confirm Password",
+    "EMAIL": "Email",
+    "FIRST-NAME": "First Name",
+    "LAST-NAME": "Last Name",
+    "ROLE": "Role",
+    "STUDENT": "Student",
+    "TEACHER": "Teacher",
+    "HAVE_ACCOUNT": "Already have an account?"
+  },
+  "CLASSROOM": {
+    "CREATE": "Create Classroom",
+    "NAME": "Classroom Name",
+    "DESCRIPTION": "Classroom Description",
+    "MY-CLASSROOMS": "My Classrooms",
+    "JOIN-CLASSROOM": "Join Classroom",
+    "JOIN-CODE": "Enter classroom joincode",
+    "CREATED-BY": "Created by:",
+    "SUGGESTED": "Suggested classrooms",
+    "JOIN": "Join"
+  },
+  "CLASSROOM-DETAILS": {
+    "BACK": "Back",
+    "LEAVE": "Leave classroom",
+    "DELETE": "Delete classroom",
+    "INFO": "Classroom Information",
+    "DESCRIPTION": "Description",
+    "CREATED-BY": "Created by:",
+    "JOIN-CODE": "Join Code",
+    "MEMBERS": "Members",
+    "STUDENTS": "Student",
+    "TEACHERS": "Teacher",
+    "MORE": "See more",
+    "WANT-TO-SHARE": "Do you want to share anything?",
+    "CANCEL": "Cancel",
+    "POSTS": "Posts in Classroom"
+  },
+  "CREATE-POST": {
+    "TITLE": "Title",
+    "CONTENT": "What do you want to share?",
+    "SUBMIT": "Submit"
+  },
+  "POST": {
+    "LIKE": "Like",
+    "COMMENT": "Comment",
+    "SHARE": "Share"
+  },
+  "COMMENT": {
+    "MORE": "See more comments",
+    "EDIT": "Edit",
+    "DELETE": "Delete"
+  },
+  "CHAT": {
+    "SEND": "Send",
+    "MESSAGE": "Message",
+    "NO-MESSAGES": "No messages",
+    "SELECT-USER": "Select a user to chat",
+    "SEARCH": "Search for users"
+  },
+  "PROFILE": {
+    "DATE": "Join date",
+    "CHANGE-PROFILE": "Update Profile",
+    "CHANGE-PASSWORD": "Change Password",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "FIRST-NAME": "First Name",
+    "LAST-NAME": "Last Name",
+    "EMAIL": "Email",
+    "OLD-PASSWORD": "Old Password",
+    "NEW-PASSWORD": "New Password",
+    "CONFIRM-PASSWORD": "Confirm New Password"
+  },
+  "CALLBACK": 
+  {
+    "SUCCESS": "Login Successful!",
+    "PROVIDER": "You logged in with",
+    "PROCESSING": "Processing Login...",
+    "REDIRECTING": "You will be redirected shortly."
+  }
+}

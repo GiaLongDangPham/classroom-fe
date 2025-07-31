@@ -7,6 +7,7 @@ import { FileService } from '../../../../core/services/file.service';
 import { AvatarComponent } from '../../../../shared/avatar/avatar.component';
 import { UserResponse } from '../../../../shared/models/response/user.response';
 import { UserService } from '../../../../core/services/user.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-post',
@@ -14,7 +15,8 @@ import { UserService } from '../../../../core/services/user.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    AvatarComponent
+    AvatarComponent,
+    TranslateModule
 ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss'

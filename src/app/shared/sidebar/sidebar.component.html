@@ -2,12 +2,18 @@
   <h2 class="text-2xl font-bold text-blue-600 mb-8">Classroom</h2>
 
   <nav class="flex flex-col gap-4">
-    <a routerLink="/classroom" class="text-gray-700 hover:text-blue-600"><i class="fa-solid fa-landmark"></i> Lớp học</a>
-    <a routerLink="/profile" class="text-gray-700 hover:text-blue-600"><i class="fa-solid fa-user"></i> Hồ sơ</a>
-    <a routerLink="/messages" class="text-gray-700 hover:text-blue-600"><i class="fa-solid fa-comments"></i> Tin nhắn</a>
+    <a routerLink="/classroom" class="text-gray-700 no-underline hover:text-blue-600">
+      <i class="fa-solid fa-landmark"></i> {{ 'SIDEBAR.CLASSROOM' | translate }}
+    </a>
+    <a routerLink="/profile" class="text-gray-700 no-underline hover:text-blue-600">
+      <i class="fa-solid fa-user"></i> {{ 'SIDEBAR.PROFILE' | translate }}
+    </a>
+    <a routerLink="/messages" class="text-gray-700 no-underline hover:text-blue-600">
+      <i class="fa-solid fa-comments"></i> {{ 'SIDEBAR.MESSAGES' | translate }}
+    </a>
   </nav>
 
   <div class="mt-10 border-t pt-4 text-sm text-gray-500">
-    Đăng nhập bởi: <strong>{{ currentUser?.firstName + ' ' + currentUser?.lastName }}</strong>
+    {{ 'SIDEBAR.LOGIN-BY' | translate }} <strong>{{ currentUser?.firstName + ' ' + currentUser?.lastName }}</strong>
   </div>
 </aside>

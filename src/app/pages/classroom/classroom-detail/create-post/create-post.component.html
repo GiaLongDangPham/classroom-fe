@@ -8,13 +8,13 @@
       <input
         type="text"
         formControlName="title"
-        placeholder="Tiêu đề bài viết..."
+        placeholder="{{ 'CREATE-POST.TITLE' | translate }}"
         class="w-full px-4 py-2 border border-gray-300 rounded-lg"
       />
       <textarea
         formControlName="content"
         rows="4"
-        placeholder="Nội dung bạn muốn chia sẻ..."
+        placeholder="{{ 'CREATE-POST.CONTENT' | translate }}"
         class="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
       ></textarea>
 
@@ -31,7 +31,7 @@
         [disabled]="postForm.invalid || isUploading"
         class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition w-full"
       >
-        {{ isUploading ? 'Đang tải ảnh...' : 'Đăng bài' }}
+        {{ isUploading ? 'Đang tải ảnh...' : 'CREATE-POST.SUBMIT' | translate }}
       </button>
     </div>
   </div>

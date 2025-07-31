@@ -1,48 +1,64 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { ApiResponse } from '../models/api.response';
+import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { UserResponse } from '../models/response/user.response';
+import { AvatarComponent } from '../avatar/avatar.component';
+import { BehaviorSubject } from 'rxjs';
+import { UserService } from '../../core/services/user.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    AvatarComponent
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
 
+  user$ = this.userService.user$;
   userFullName: string = '';
-
+  user: UserResponse | null = null;
+  isLoggedIn$ = this.authService.isLoggedIn$;
+  isDropdownOpen = false;
 
   constructor(  
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private userService: UserService,
+    private translate: TranslateService
+  ) {
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+  }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      if (typeof localStorage !== 'undefined') {
-        const userResponseJSON = localStorage.getItem('user'); 
-        if (userResponseJSON) {
-          const userResponse = JSON.parse(userResponseJSON);  
-          this.userFullName = `${userResponse?.firstName} ${userResponse?.lastName}`;
-        }
+    debugger
+    this.user$.subscribe(user => {
+      this.user = user;
+      if (user) {
+        this.userFullName = `${user.firstName} ${user.lastName}`;
       }
-    }, 100);
+    });
   }
 
   logout() {
+    this.userFullName = '';
     this.authService.logout();
   }
 
-  getMyProfile(){
-    this.authService.getMyProfile().subscribe({
-      next: (response: ApiResponse) => {
-        debugger
-        const user = response.data;
-        this.userFullName = `${user.firstName} ${user.lastName}`;
-      },
-      error: () => {
-        console.error('Không thể lấy thông tin người dùng');
-      }
-    });
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  switchLanguage(lang: string) {
+    this.translate.use(lang);
+    // Lưu ngôn ngữ vào localStorage để persist
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('selectedLanguage', lang);
+    }
   }
 }

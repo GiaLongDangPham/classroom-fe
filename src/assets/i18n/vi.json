@@ -1,0 +1,108 @@
+{
+  "HEADER": {
+    "LANGUAGE": "Ngôn ngữ",
+    "VIETNAMESE": "Tiếng Việt",
+    "ENGLISH": "Tiếng Anh",
+    "SIGN-OUT": "Đăng xuất",
+    "SIGN-IN": "Đăng nhập"
+  },
+  "SIDEBAR": {
+    "CLASSROOM": "Lớp học",
+    "PROFILE": "Hồ sơ",
+    "MESSAGES": "Tin nhắn",
+    "LOGIN-BY": "Đăng nhập bởi:"
+  },
+  "LOGIN": {
+    "WELCOME-BACK": "Chào mừng trở lại!",
+    "SIGN-IN": "Đăng nhập",
+    "SIGN-UP": "Đăng ký",
+    "USERNAME": "Tên đăng nhập",
+    "PASSWORD": "Mật khẩu",
+    "OR": "HOẶC",
+    "SIGN-IN-FACEBOOK": "Đăng nhập bằng Facebook",
+    "SIGN-IN-GOOGLE": "Đăng nhập bằng Google",
+    "NO_ACCOUNT": "Bạn chưa có tài khoản?"
+  },
+  "REGISTER": {
+    "TITLE": "Tạo Tài Khoản",
+    "USERNAME": "Tên đăng nhập",
+    "PASSWORD": "Mật khẩu",
+    "CONFIRM-PASSWORD": "Xác nhận mật khẩu",
+    "EMAIL": "Email",
+    "FIRST-NAME": "Họ",
+    "LAST-NAME": "Tên",
+    "ROLE": "Vai trò",
+    "STUDENT": "Học sinh",
+    "TEACHER": "Giáo viên",
+    "HAVE_ACCOUNT": "Bạn đã có tài khoản?"
+  },
+  "CLASSROOM": {
+    "CREATE": "Tạo lớp học",
+    "NAME": "Tên lớp học",
+    "DESCRIPTION": "Mô tả lớp học",
+    "MY-CLASSROOMS": "Lớp học của tôi",
+    "JOIN-CLASSROOM": "Tham gia lớp học",
+    "JOIN-CODE": "Nhập mã lớp muốn vào",
+    "CREATED-BY": "Người tạo:",
+    "SUGGESTED": "Lớp học gợi ý",
+    "JOIN": "Tham gia"
+  },
+  "CLASSROOM-DETAILS": {
+    "BACK": "Quay lại",
+    "LEAVE": "Rời lớp",
+    "DELETE": "Xoá lớp",
+    "INFO": "Thông tin lớp học",
+    "DESCRIPTION": "Mô tả",
+    "CREATED-BY": "Người tạo:",
+    "JOIN-CODE": "Mã lớp",
+    "MEMBERS": "Thành viên",
+    "STUDENTS": "Học sinh",
+    "TEACHERS": "Giáo viên",
+    "MORE": "Xem thêm",
+    "WANT-TO-SHARE": "Bạn có muốn chia sẻ điều gì?",
+    "CANCEL": "Hủy",
+    "POSTS": "Bài viết trong lớp"
+  },
+  "CREATE-POST": {
+    "TITLE": "Tiêu đề bài viết",
+    "CONTENT": "Bạn muốn chia sẻ nội dung gì?",
+    "SUBMIT": "Đăng bài"
+  },
+  "POST": {
+    "LIKE": "Thích",
+    "COMMENT": "Bình luận",
+    "SHARE": "Chia sẻ"
+  },
+  "COMMENT": {
+    "MORE": "Xem thêm bình luận",
+    "EDIT": "Chỉnh sửa",
+    "DELETE": "Xoá"
+  },
+  "CHAT": {
+    "SEND": "Gửi",
+    "MESSAGE": "Tin nhắn",
+    "NO-MESSAGES": "Không có tin nhắn nào",
+    "SELECT-USER": "Chọn người dùng để trò chuyện",
+    "SEARCH": "Tìm kiếm người dùng"
+  },
+  "PROFILE": {
+    "DATE": "Ngày tham gia",
+    "CHANGE-PROFILE": "Cập nhật thông tin",
+    "CHANGE-PASSWORD": "Đổi mật khẩu",
+    "CANCEL": "Hủy",
+    "SAVE": "Lưu",
+    "FIRST-NAME": "Họ",
+    "LAST-NAME": "Tên",
+    "EMAIL": "Email",
+    "OLD-PASSWORD": "Mật khẩu cũ",
+    "NEW-PASSWORD": "Mật khẩu mới",
+    "CONFIRM-PASSWORD": "Xác nhận mật khẩu mới"
+  },
+  "CALLBACK": 
+  {
+    "SUCCESS": "Đăng nhập thành công!",
+    "PROVIDER": "Bạn đã đăng nhập bằng",
+    "PROCESSING": "Đang xử lý đăng nhập...",
+    "REDIRECTING": "Bạn sẽ được chuyển hướng ngay."
+  }
+}

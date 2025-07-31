@@ -2,7 +2,7 @@
 <div class="chat-wrapper">
   <!-- Header -->
   <div class="chat-header">
-    Chat lớp học
+    Chat
   </div>
 
   <!-- Danh sách tin nhắn -->
@@ -67,7 +67,7 @@
       placeholder="Nhập tin nhắn..." 
     />
     <button (click)="sendMessage()" class="send-button">
-      Gửi
+      {{ 'CHAT.SEND' | translate }}
     </button>
   </div>
 </div>

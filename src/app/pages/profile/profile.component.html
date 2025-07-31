@@ -25,7 +25,7 @@
     <!-- Info grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div>
-        <label class="text-sm text-gray-500">Ngày tham gia</label>
+        <label class="text-sm text-gray-500">{{ 'PROFILE.DATE' | translate }}</label>
         <div class="text-gray-800 font-medium">{{ user?.createdAt | date: 'mediumDate' }}</div>
       </div>
     </div>
@@ -33,10 +33,10 @@
     <!-- Buttons -->
     <div class="flex gap-4 mb-6">
       <button (click)="toggleEditForm()" class="px-4 py-2 bg-blue-600 text-white rounded w-44">
-        {{ showEditForm ? 'Hủy' : 'Cập nhật thông tin' }}
+        {{ showEditForm ? ( 'PROFILE.CANCEL' | translate ) : ( 'PROFILE.CHANGE-PROFILE' | translate ) }}
       </button>
-      <button (click)="toggleChangePasswordForm()" class="px-4 py-2 bg-gray-100 text-gray-800 rounded w-44">
-        {{ showChangePasswordForm ? 'Hủy' : 'Cập nhật mật khẩu' }}
+      <button (click)="toggleChangePasswordForm()" class="px-4 py-2 bg-blue-600 text-white rounded w-44">
+        {{ showChangePasswordForm ? ( 'PROFILE.CANCEL' | translate ) : ( 'PROFILE.CHANGE-PASSWORD' | translate ) }}
       </button>
     </div>
 
@@ -44,20 +44,26 @@
     <div *ngIf="showEditForm" class="space-y-4 mb-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label class="text-sm text-gray-600">Họ</label>
+          <label class="text-sm text-gray-600">
+            {{ 'PROFILE.FIRST-NAME' | translate }}
+          </label>
           <input [(ngModel)]="editData.firstName" class="w-full px-4 py-2 border rounded" type="text" />
         </div>
         <div>
-          <label class="text-sm text-gray-600">Tên</label>
+          <label class="text-sm text-gray-600">
+            {{ 'PROFILE.LAST-NAME' | translate }}
+          </label>
           <input [(ngModel)]="editData.lastName" class="w-full px-4 py-2 border rounded" type="text" />
         </div>
         <div class="md:col-span-2">
-          <label class="text-sm text-gray-600">Email</label>
+          <label class="text-sm text-gray-600">
+            {{ 'PROFILE.EMAIL' | translate }}
+          </label>
           <input [(ngModel)]="editData.email" class="w-full px-4 py-2 border rounded" type="text" />
         </div>
       </div>
       <button (click)="updateProfile()" class="px-4 py-2 bg-green-600 text-white rounded">
-        Lưu thay đổi
+        {{ 'PROFILE.SAVE' | translate }}
       </button>
     </div>
 
@@ -65,20 +71,26 @@
     <div *ngIf="showChangePasswordForm" class="space-y-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="md:col-span-2">
-          <label class="text-sm text-gray-600">Mật khẩu cũ</label>
+          <label class="text-sm text-gray-600">
+            {{ 'PROFILE.OLD-PASSWORD' | translate }}
+          </label>
           <input [(ngModel)]="editPasswordData.oldPassword" type="password" class="w-full px-4 py-2 border rounded" />
         </div>
         <div>
-          <label class="text-sm text-gray-600">Mật khẩu mới</label>
+          <label class="text-sm text-gray-600">
+            {{ 'PROFILE.NEW-PASSWORD' | translate }}
+          </label>
           <input [(ngModel)]="editPasswordData.newPassword" type="password" class="w-full px-4 py-2 border rounded" />
         </div>
         <div>
-          <label class="text-sm text-gray-600">Xác nhận mật khẩu mới</label>
+          <label class="text-sm text-gray-600">
+            {{ 'PROFILE.CONFIRM-PASSWORD' | translate }}
+          </label>
           <input [(ngModel)]="editPasswordData.confirmPassword" type="password" class="w-full px-4 py-2 border rounded" />
         </div>
       </div>
       <button (click)="onChangePassword()" class="px-4 py-2 bg-green-600 text-white rounded">
-        Đổi mật khẩu
+        {{ 'PROFILE.SAVE' | translate }}
       </button>
     </div>
   </div>

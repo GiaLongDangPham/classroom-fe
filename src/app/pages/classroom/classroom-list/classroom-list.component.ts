@@ -8,6 +8,7 @@ import { ApiResponse } from '../../../shared/models/api.response';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserResponse } from '../../../shared/models/response/user.response';
 import { ClassroomRequest } from '../../../shared/models/request/classroom.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-classroom-list',
@@ -15,6 +16,7 @@ import { ClassroomRequest } from '../../../shared/models/request/classroom.model
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
 ],
   templateUrl: './classroom-list.component.html',
   styleUrl: './classroom-list.component.scss'

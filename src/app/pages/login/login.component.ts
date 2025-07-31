@@ -7,13 +7,16 @@ import { AuthRequest } from '../../shared/models/request/auth-request.model';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../core/services/user.service';
 import { ApiResponse } from '../../shared/models/api.response';
+import { environment } from '../../../environments/environment';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    TranslateModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -32,12 +35,8 @@ export class LoginComponent {
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
   ) {}
-
-  // ngOnInit() {
-  //   if (typeof window !== 'undefined') localStorage.clear(); // Xóa localStorage khi vào trang login
-  // }
 
   onSubmit() {
     this.loading = true;
@@ -63,7 +62,8 @@ export class LoginComponent {
           this.toastr.error('Không nhận được token hoặc refreshToken từ server');
           return;
         }
-        
+        debugger
+        this.authService.setLoggedIn(true);
         this.authService.setToken(response.data.token);
         this.authService.setRefreshToken(response.data.refreshToken);
 
@@ -94,6 +94,17 @@ export class LoginComponent {
   }
 
   loginWithGoogle(){
+    const callbackUrl = environment.redirectUri;
+    const authUrl = environment.authUrl;
+    const googleClientId = environment.clientId;
+
+    const targetUrl = `${authUrl}?redirect_uri=${encodeURIComponent(
+      callbackUrl
+    )}&response_type=code&client_id=${googleClientId}&scope=openid%20email%20profile`;
+
+    console.log(targetUrl);
+    debugger
+    window.location.href = targetUrl;
   }
 
   loginWithFacebook(){

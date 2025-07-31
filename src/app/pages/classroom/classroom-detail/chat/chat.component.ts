@@ -6,6 +6,7 @@ import { UserResponse } from '../../../../shared/models/response/user.response';
 import { ChatService } from '../../../../core/services/chat.service';
 import { AvatarComponent } from '../../../../shared/avatar/avatar.component';
 import { Subscription } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chat',
@@ -14,6 +15,7 @@ import { Subscription } from 'rxjs';
     CommonModule,
     FormsModule,
     AvatarComponent,
+    TranslateModule
   ],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],

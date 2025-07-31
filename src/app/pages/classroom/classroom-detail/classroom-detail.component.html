@@ -3,27 +3,27 @@
     <!-- Nút quay lại + Rời lớp -->
     <div class="flex items-center justify-between">
       <button (click)="goBack()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition">
-        <i class="fa-solid fa-arrow-left"></i> Quay lại danh sách lớp
+        <i class="fa-solid fa-arrow-left"></i> {{ 'CLASSROOM-DETAILS.BACK' | translate }}
       </button>
       <button (click)="leaveOrDelete()" class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition">
-        {{ isCreator ? 'Xoá lớp học' : 'Rời lớp học' }}
+        {{ isCreator ? ('CLASSROOM-DETAILS.DELETE' | translate) : ('CLASSROOM-DETAILS.LEAVE' | translate) }}
       </button>
     </div>
 
     <!-- thông tin lớp -->
     <details class="bg-white rounded-xl shadow">
-      <summary class="cursor-pointer px-6 py-4 text-xl font-semibold text-blue-600">Thông tin lớp học</summary>
+      <summary class="cursor-pointer px-6 py-4 text-xl font-semibold text-blue-600">{{ 'CLASSROOM-DETAILS.INFO' | translate }}</summary>
       <div class="p-6 space-y-2">
-        <p class="text-gray-700">{{ classroom.description }}</p>
-        <p class="text-gray-600">Người tạo: <strong>{{ classroom.createdBy }}</strong></p>
-        <p class="text-gray-600">Mã lớp: <strong>{{ classroom.joinCode }}</strong></p>
+        <p class="text-gray-700">{{ 'CLASSROOM-DETAILS.DESCRIPTION' | translate }}: {{ classroom.description }}</p>
+        <p class="text-gray-600">{{ 'CLASSROOM-DETAILS.CREATED-BY' | translate }}: <strong>{{ classroom.createdBy }}</strong></p>
+        <p class="text-gray-600">{{ 'CLASSROOM-DETAILS.JOIN-CODE' | translate }}: <strong>{{ classroom.joinCode }}</strong></p>
       </div>
     </details>
 
     <!-- thành viên -->
     <details class="bg-white rounded-xl shadow">
       <summary class="cursor-pointer px-6 py-4 text-xl font-semibold text-gray-800">
-        Thành viên ({{ classroom.members?.length || 0 }})
+        {{ 'CLASSROOM-DETAILS.MEMBERS' | translate }} ({{ classroom.members?.length || 0 }})
       </summary>
       <div class="p-6 space-y-3">
         <div *ngFor="let member of classroom.members | slice:0:visibleMembers"
@@ -38,13 +38,13 @@
                   'bg-blue-100 text-blue-800': member.roleInClass === 'TEACHER',
                   'bg-green-100 text-green-800': member.roleInClass === 'STUDENT'
                 }">
-            {{ member.roleInClass === 'TEACHER' ? 'Giáo viên' : 'Học sinh' }}
+            {{ member.roleInClass === 'TEACHER' ? ('CLASSROOM-DETAILS.TEACHERS' | translate) : ('CLASSROOM-DETAILS.STUDENTS' | translate) }}
           </span>
         </div>
         <button *ngIf="visibleMembers < classroom.members!.length"
                 (click)="showMoreMembers()"
                 class="flex items-center gap-2 text-gray-600 hover:text-blue-600 text-sm px-3 py-1 mt-2 rounded-full bg-gray-100 hover:bg-blue-100 transition">
-          <span>Hiển thị thêm</span>
+          <span>{{ 'CLASSROOM-DETAILS.MORE' | translate }}</span>
         </button>
       </div>
     </details>
@@ -53,13 +53,13 @@
     <div class="bg-white rounded-xl shadow px-5 py-4 flex items-center gap-3 border hover:shadow-md hover:border-gray-300 transition cursor-pointer"
          (click)="toggleCreatePost()" *ngIf="!isCreatingPost">
       <app-avatar [user]="user" [width]="'w-10'" [height]="'h-10'" [isAllowUpload]="false"></app-avatar>
-      <p class="text-gray-600 font-medium">Bạn muốn chia sẻ điều gì?</p>
+      <p class="text-gray-600 font-medium">{{ 'CLASSROOM-DETAILS.WANT-TO-SHARE' | translate }}</p>
     </div>
 
     <button *ngIf="isCreatingPost"
             (click)="onCancelClick()"
             class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-100">
-      Huỷ
+      <i class="fa-solid fa-xmark"></i> {{ 'CLASSROOM-DETAILS.CANCEL' | translate }}
     </button>
 
     <div *ngIf="isCreatingPost" class="bg-white p-4 rounded-xl shadow">
@@ -71,7 +71,9 @@
 
     <!-- Danh sách bài viết -->
     <div class="space-y-4">
-      <h3 class="text-2xl font-semibold text-gray-800 mb-2">Bài viết trong lớp</h3>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-2">
+        {{ 'CLASSROOM-DETAILS.POSTS' | translate }} ({{ posts.length }})
+      </h3>
       <app-post *ngFor="let post of posts" [post]="post" [user]="user"></app-post>
     </div>
   </section>
@@ -82,9 +84,9 @@
     class="fixed bottom-10 right-10 w-44 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold text-lg rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transform transition-all duration-300 z-50 flex items-center justify-center gap-2"
   >
     <span class="text-xl"><i class="fa-solid fa-comment"></i></span>
-    <span>{{ showChat ? 'Đóng' : 'Chat' }}</span>
+    <span>{{ showChat ? ('CLASSROOM-DETAILS.CANCEL' | translate) : 'Chat' }}</span>
   </button>
-
+  
   <app-chat 
     *ngIf="showChat"
     [classroomId]="classroomId" 

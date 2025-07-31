@@ -11,11 +11,12 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { AuthRequest } from '../../shared/models/request/auth-request.model';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -32,7 +33,6 @@ export class RegisterComponent {
     validators: [this.matchPasswords]
   });
 
-  loading = false;
   errorMessage = '';
 
   constructor(
@@ -51,17 +51,14 @@ export class RegisterComponent {
   onSubmit() {
     if (this.form.invalid) {
       this.errorMessage = 'Vui lòng nhập đầy đủ thông tin';
-      this.loading = false;
       return;
     }
 
-    this.loading = true;
     const { username, password, firstName, lastName, email, role } = this.form.value;
 
     // Kiểm tra các giá trị bắt buộc
     if (!username || !password || !firstName || !lastName || !email || !role) {
       this.errorMessage = 'Vui lòng nhập đầy đủ thông tin';
-      this.loading = false;
       return;
     }
 
@@ -76,12 +73,10 @@ export class RegisterComponent {
 
     this.authService.register(payload).subscribe({
       next: () => {
-        this.loading = false;
         this.router.navigate(['/login']);
         this.toastr.success('Đăng ký thành công!');
       },
       error: () => {
-        this.loading = false;
         this.toastr.error('Đăng ký thất bại!');
       }
     });

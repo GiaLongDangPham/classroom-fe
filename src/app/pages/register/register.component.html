@@ -1,12 +1,12 @@
 <div class="min-h-screen bg-gray-50 flex items-center justify-center px-4">
   <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
     <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">
-      Đăng ký
+      {{'REGISTER.TITLE' | translate}}
     </h2>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Username</label>
+        <label class="block text-sm font-medium text-gray-700">{{'REGISTER.USERNAME' | translate}}</label>
         <input
           formControlName="username"
           type="text"
@@ -15,7 +15,7 @@
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Mật khẩu</label>
+        <label class="block text-sm font-medium text-gray-700">{{'REGISTER.PASSWORD' | translate}}</label>
         <input
           formControlName="password"
           type="password"
@@ -24,7 +24,7 @@
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Nhâp lại Mật khẩu</label>
+        <label class="block text-sm font-medium text-gray-700">{{'REGISTER.CONFIRM-PASSWORD' | translate}}</label>
         <input
           formControlName="confirmPassword"
           type="password"
@@ -33,7 +33,7 @@
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Họ</label>
+        <label class="block text-sm font-medium text-gray-700">{{'REGISTER.FIRST-NAME' | translate}}</label>
         <input
           formControlName="firstName"
           type="text"
@@ -42,7 +42,7 @@
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Tên</label>
+        <label class="block text-sm font-medium text-gray-700">{{'REGISTER.LAST-NAME' | translate}}</label>
         <input
           formControlName="lastName"
           type="text"
@@ -51,7 +51,7 @@
       </div>
 
       <div class="mb-4"> 
-        <label class="block text-sm font-medium text-gray-700">Email</label>
+        <label class="block text-sm font-medium text-gray-700">{{'REGISTER.EMAIL' | translate}}</label>
         <input
           formControlName="email"
           type="email"
@@ -60,13 +60,13 @@
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Vai trò</label>
+        <label class="block text-sm font-medium text-gray-700">{{'REGISTER.ROLE' | translate}}</label>
         <select
           formControlName="role"
           class="mt-1 w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="STUDENT">Học sinh</option>
-          <option value="TEACHER">Giáo viên</option>
+          <option value="STUDENT">{{'REGISTER.STUDENT' | translate}}</option>
+          <option value="TEACHER">{{'REGISTER.TEACHER' | translate}}</option>
         </select>
       </div>
       
@@ -78,15 +78,14 @@
       <button
         type="submit"
         class="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition"
-        [disabled]="loading"
       >
-        {{ loading ? 'Đang đăng ký...' : 'Đăng ký' }}
+        {{ 'LOGIN.SIGN-UP' | translate }}
       </button>
     </form>
 
     <p class="text-sm text-gray-500 text-center mt-4">
-      Đã có tài khoản?
-      <a routerLink="/login" class="text-blue-600 hover:underline">Đăng nhập</a>
+      {{ 'REGISTER.HAVE_ACCOUNT' | translate }}
+      <a routerLink="/login" class="text-blue-600 hover:underline">{{ 'LOGIN.SIGN-IN' | translate }}</a>
     </p>
   </div>
 </div>

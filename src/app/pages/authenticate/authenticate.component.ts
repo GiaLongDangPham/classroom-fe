@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { ApiResponse } from '../../shared/models/api.response';
+import { AuthResponse } from '../../shared/models/response/auth.response';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-authenticate',
@@ -13,19 +16,42 @@ import { ApiResponse } from '../../shared/models/api.response';
 export class AuthenticateComponent {
 
   constructor(
-    private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
-    const code = this.route.snapshot.queryParamMap.get('code');
-    if (code) {
-      this.authService.outboundAuthenticate(code).subscribe({
-        next: (res: ApiResponse) => {
+    debugger
+    const authCodeRegex = /code=([^&]+)/;
+    const isMatch = window.location.href.match(authCodeRegex);
+    if (isMatch) {
+      const authCode = isMatch[1];
+      debugger
+      this.authService.outboundAuthenticate(authCode).subscribe({
+        next: (res: AuthResponse) => {
           debugger
-          this.authService.setToken(res.data.token);
-          this.router.navigate(['/classroom']);
+          this.authService.setLoggedIn(true);
+          this.authService.setToken(res.token);
+          this.authService.setRefreshToken(res.refreshToken);
+          this.authService.getMyProfile().subscribe({
+            next: (res: ApiResponse) => {  
+              const user = res.data;
+              if(!user) {
+                this.toastr.error('Không lấy được thông tin người dùng');
+                return;
+              }
+
+              this.userService.saveToLocalStorage(user);
+              this.toastr.success('Đăng nhập thành công!');
+              this.router.navigate(['/classroom']);
+            },
+            error: (error) => {
+              console.log('Error fetching user profile:', error);
+              this.toastr.error('Không lấy được thông tin người dùng');
+            } 
+          })
         },
         error: (err) => {
           console.error('Error during authentication:', err);

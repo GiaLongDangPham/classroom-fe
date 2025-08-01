@@ -1,0 +1,110 @@
+{
+  "HEADER": {
+    "LANGUAGE": "Langue",
+    "VIETNAMESE": "Vietnamien",
+    "ENGLISH": "Anglais",
+    "FRENCH": "Français",
+    "CHINESE": "Chinois",
+    "JAPANESE": "Japonais",
+    "SIGN-OUT": "Déconnexion",
+    "SIGN-IN": "Connexion"
+  },
+  "SIDEBAR": {
+    "CLASSROOM": "Salle de classe",
+    "PROFILE": "Profil",
+    "MESSAGES": "Messages",
+    "LOGIN-BY": "Connecté via:"
+  },
+  "LOGIN": {
+    "WELCOME-BACK": "Bon retour !",
+    "SIGN-IN": "Connexion",
+    "SIGN-UP": "S'inscrire",
+    "USERNAME": "Nom d'utilisateur",
+    "PASSWORD": "Mot de passe",
+    "OR": "OU",
+    "SIGN-IN-FACEBOOK": "Se connecter avec Facebook",
+    "SIGN-IN-GOOGLE": "Se connecter avec Google",
+    "NO_ACCOUNT": "Vous n'avez pas de compte ?"
+  },
+  "REGISTER": {
+    "TITLE": "Créer un compte",
+    "USERNAME": "Nom d'utilisateur",
+    "PASSWORD": "Mot de passe",
+    "CONFIRM-PASSWORD": "Confirmer le mot de passe",
+    "EMAIL": "Email",
+    "FIRST-NAME": "Prénom",
+    "LAST-NAME": "Nom",
+    "ROLE": "Rôle",
+    "STUDENT": "Étudiant",
+    "TEACHER": "Enseignant",
+    "HAVE_ACCOUNT": "Vous avez déjà un compte ?"
+  },
+  "CLASSROOM": {
+    "CREATE": "Créer une classe",
+    "NAME": "Nom de la classe",
+    "DESCRIPTION": "Description de la classe",
+    "MY-CLASSROOMS": "Mes classes",
+    "JOIN-CLASSROOM": "Rejoindre une classe",
+    "JOIN-CODE": "Entrer le code de la classe",
+    "CREATED-BY": "Créé par :",
+    "SUGGESTED": "Classes suggérées",
+    "JOIN": "Rejoindre"
+  },
+  "CLASSROOM-DETAILS": {
+    "BACK": "Retour",
+    "LEAVE": "Quitter la classe",
+    "DELETE": "Supprimer la classe",
+    "INFO": "Informations sur la classe",
+    "DESCRIPTION": "Description",
+    "CREATED-BY": "Créé par :",
+    "JOIN-CODE": "Code de la classe",
+    "MEMBERS": "Membres",
+    "STUDENTS": "Étudiants",
+    "TEACHERS": "Enseignants",
+    "MORE": "Voir plus",
+    "WANT-TO-SHARE": "Vous voulez partager quelque chose ?",
+    "CANCEL": "Annuler",
+    "POSTS": "Publications dans la classe"
+  },
+  "CREATE-POST": {
+    "TITLE": "Titre de la publication",
+    "CONTENT": "Que souhaitez-vous partager ?",
+    "SUBMIT": "Publier"
+  },
+  "POST": {
+    "LIKE": "Aimer",
+    "COMMENT": "Commenter",
+    "SHARE": "Partager"
+  },
+  "COMMENT": {
+    "MORE": "Voir plus de commentaires",
+    "EDIT": "Modifier",
+    "DELETE": "Supprimer"
+  },
+  "CHAT": {
+    "SEND": "Envoyer",
+    "MESSAGE": "Message",
+    "NO-MESSAGES": "Aucun message",
+    "SELECT-USER": "Choisir un utilisateur pour discuter",
+    "SEARCH": "Rechercher un utilisateur"
+  },
+  "PROFILE": {
+    "DATE": "Date d'inscription",
+    "CHANGE-PROFILE": "Mettre à jour le profil",
+    "CHANGE-PASSWORD": "Changer le mot de passe",
+    "CANCEL": "Annuler",
+    "SAVE": "Enregistrer",
+    "FIRST-NAME": "Prénom",
+    "LAST-NAME": "Nom",
+    "EMAIL": "Email",
+    "OLD-PASSWORD": "Ancien mot de passe",
+    "NEW-PASSWORD": "Nouveau mot de passe",
+    "CONFIRM-PASSWORD": "Confirmer le nouveau mot de passe"
+  },
+  "CALLBACK": {
+    "SUCCESS": "Connexion réussie !",
+    "PROVIDER": "Connecté via",
+    "PROCESSING": "Traitement de la connexion...",
+    "REDIRECTING": "Redirection en cours."
+  }
+}

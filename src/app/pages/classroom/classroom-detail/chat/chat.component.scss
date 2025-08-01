@@ -1,6 +1,7 @@
 .chat-wrapper {
   @apply fixed bottom-20 right-6 w-[350px] h-[500px] z-40;
-  @apply flex flex-col bg-white border border-gray-300 rounded-xl shadow-lg overflow-hidden;
+  @apply flex flex-col bg-white border border-gray-300 rounded-xl shadow-lg;
+  overflow: visible; /* Cho phép tooltip hiển thị */
 }
 
 .chat-header {
@@ -8,8 +9,10 @@
 }
 
 .chat-messages {
-  @apply flex-1 overflow-y-auto p-3 space-y-2 bg-gray-50;
-  max-height: 100%;
+  @apply flex-1 p-3 space-y-2 bg-gray-50;
+  max-height: calc(500px - 100px); /* Trừ đi header và input */
+  overflow-y: auto;
+  overflow-x: visible; /* Cho phép tooltip hiển thị ngang */
 }
 
 .message-row {

@@ -14,6 +14,6 @@
   </nav>
 
   <div class="mt-10 border-t pt-4 text-sm text-gray-500">
-    {{ 'SIDEBAR.LOGIN-BY' | translate }} <strong>{{ currentUser?.firstName + ' ' + currentUser?.lastName }}</strong>
+    {{ 'SIDEBAR.LOGIN-BY' | translate }} <strong>{{ (currentUser?.firstName || '') + ' ' + (currentUser?.lastName || '') }}</strong>
   </div>
 </aside>

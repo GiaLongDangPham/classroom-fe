@@ -38,6 +38,14 @@ export class LoginComponent {
     private userService: UserService,
   ) {}
 
+  ngOnInit(): void {
+    if (typeof window === 'undefined') return;
+    this.authService.setLoggedIn(false);
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    this.userService.deleteUserFromLocalStorage(); // Clear user data
+  }
+
   onSubmit() {
     this.loading = true;
 
@@ -94,6 +102,7 @@ export class LoginComponent {
   }
 
   loginWithGoogle(){
+    debugger
     const callbackUrl = environment.redirectUri;
     const authUrl = environment.authUrl;
     const googleClientId = environment.clientId;
@@ -103,7 +112,6 @@ export class LoginComponent {
     )}&response_type=code&client_id=${googleClientId}&scope=openid%20email%20profile`;
 
     console.log(targetUrl);
-    debugger
     window.location.href = targetUrl;
   }
 

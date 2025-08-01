@@ -17,6 +17,7 @@
         *ngIf="isDropdownOpen"
         class="absolute right-0 z-50 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg py-1 text-sm text-gray-700"
       >
+        <!-- Vietnamese -->
         <li>
           <a
             class="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
@@ -25,6 +26,7 @@
             {{ 'HEADER.VIETNAMESE' | translate }}
           </a>
         </li>
+        <!-- English -->
         <li>
           <a
             class="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
@@ -33,9 +35,38 @@
             {{ 'HEADER.ENGLISH' | translate }}
           </a>
         </li>
+        <!-- French -->
+        <li>
+          <a
+            class="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            (click)="switchLanguage('fr')"
+          >
+            {{ 'HEADER.FRENCH' | translate }}
+          </a>
+        </li>
+        <!-- Chinese -->
+        <li>
+          <a
+            class="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            (click)="switchLanguage('zh')"
+          >
+            {{ 'HEADER.CHINESE' | translate }}
+          </a>
+        </li>
+        <!-- Japanese -->
+        <li>
+          <a
+            class="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            (click)="switchLanguage('ja')"
+          >
+            {{ 'HEADER.JAPANESE' | translate }}
+          </a>
+        </li>
       </ul>
     </div>
-    <button class="flex items-center gap-2 px-3 py-1 rounded-full hover:bg-gray-100 transition text-gray-700">
+
+    <!-- User-info -->
+    <button routerLink="/profile" class="flex items-center gap-2 px-3 py-1 rounded-full hover:bg-gray-100 transition text-gray-700">
       <app-avatar *ngIf="user" [user]="user" [width]="'w-8'" [height]="'h-8'" [isAllowUpload]="false"></app-avatar>
       <span *ngIf="user" class="font-semibold truncate max-w-[120px]">
         {{ userFullName }}
@@ -44,6 +75,8 @@
         Anonymus
       </span>
     </button>
+
+    <!-- Login/Logout -->
     <button *ngIf="(isLoggedIn$ | async)" (click)="logout()" class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition">
       {{ 'HEADER.SIGN-OUT' | translate }}
     </button>

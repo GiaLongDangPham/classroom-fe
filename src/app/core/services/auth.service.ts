@@ -28,8 +28,8 @@ export class AuthService {
     return this.http.post<ApiResponse>(`${this.baseUrl}/login`, request);
   }
 
-  outboundAuthenticate(code: String): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.baseUrl}/outbound/authentication?code=${code}`, {});
+  outboundAuthenticate(code: String): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.baseUrl}/outbound/authentication?code=${code}`, { code });
   }
 
   register(request: AuthRequest): Observable<any> {

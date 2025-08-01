@@ -1,7 +1,7 @@
 import { inject, Pipe, PipeTransform, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { formatDistanceToNow } from 'date-fns';
-import { vi, enUS } from 'date-fns/locale';
+import { vi, enUS, fr, zhCN, ja } from 'date-fns/locale';
 import { Subscription } from 'rxjs';
 
 @Pipe({
@@ -26,18 +26,28 @@ export class TimeAgoPipe implements PipeTransform, OnDestroy {
     this.currentLang = this.translate.currentLang || this.translate.getDefaultLang();
   }
 
-  transform(value: Date | undefined): string  {
+  transform(value: Date | string | undefined): string {
     if (!value) return '';
-    
-    const lang = this.translate.currentLang || this.translate.getDefaultLang();
-    const locale = lang === 'vi' ? vi : enUS;
 
-    return formatDistanceToNow(new Date(value), { addSuffix: true, locale });
+    const date = typeof value === 'string' ? new Date(value) : value;
+    const locale = this.getLocale(this.currentLang);
+
+    return formatDistanceToNow(date, { addSuffix: true, locale });
   }
 
   ngOnDestroy(): void {
     if (this.langSubscription) {
       this.langSubscription.unsubscribe();
+    }
+  }
+
+  private getLocale(lang: string) {
+    switch (lang) {
+      case 'vi': return vi;
+      case 'fr': return fr;
+      case 'zh': return zhCN;
+      case 'ja': return ja;
+      default: return enUS;
     }
   }
 }

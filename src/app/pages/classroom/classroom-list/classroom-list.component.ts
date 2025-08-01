@@ -40,6 +40,7 @@ export class ClassroomListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    debugger
     const userResponseJSON = localStorage.getItem('user'); 
     const userResponse = JSON.parse(userResponseJSON!);  
     this.currentUser = userResponse || {}; // Trả về đối tượng rỗng nếu không có dữ liệu

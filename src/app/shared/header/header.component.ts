@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
-import { ApiResponse } from '../models/api.response';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { UserResponse } from '../models/response/user.response';
 import { AvatarComponent } from '../avatar/avatar.component';
-import { BehaviorSubject } from 'rxjs';
 import { UserService } from '../../core/services/user.service';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
     CommonModule,
     TranslateModule,
-    AvatarComponent
+    AvatarComponent,
+    RouterModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

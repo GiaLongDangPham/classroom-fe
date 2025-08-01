@@ -38,7 +38,7 @@ export class ClassroomDetailComponent implements OnInit{
   isCreator = false;
   posts: PostResponse[] = [];
   defaultAvatar = '/assets/default-avatar.png';
-  visibleMembers:number = 2;
+  visibleMembers:number = 4;
   isCreatingPost = false;
   showChat = false;
 
@@ -97,7 +97,7 @@ export class ClassroomDetailComponent implements OnInit{
   }
 
   showMoreMembers() {
-    this.visibleMembers += 2;
+    this.visibleMembers += 4;
   }
 
   leaveOrDelete() {

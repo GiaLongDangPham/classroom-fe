@@ -1,0 +1,110 @@
+{
+  "HEADER": {
+    "LANGUAGE": "言語",
+    "VIETNAMESE": "ベトナム語",
+    "ENGLISH": "英語",
+    "FRENCH": "フランス語",
+    "CHINESE": "中国語",
+    "JAPANESE": "日本語",
+    "SIGN-OUT": "ログアウト",
+    "SIGN-IN": "ログイン"
+  },
+  "SIDEBAR": {
+    "CLASSROOM": "クラスルーム",
+    "PROFILE": "プロフィール",
+    "MESSAGES": "メッセージ",
+    "LOGIN-BY": "ログイン方法："
+  },
+  "LOGIN": {
+    "WELCOME-BACK": "おかえりなさい！",
+    "SIGN-IN": "ログイン",
+    "SIGN-UP": "サインアップ",
+    "USERNAME": "ユーザー名",
+    "PASSWORD": "パスワード",
+    "OR": "または",
+    "SIGN-IN-FACEBOOK": "Facebookでログイン",
+    "SIGN-IN-GOOGLE": "Googleでログイン",
+    "NO_ACCOUNT": "アカウントをお持ちでないですか？"
+  },
+  "REGISTER": {
+    "TITLE": "アカウントを作成",
+    "USERNAME": "ユーザー名",
+    "PASSWORD": "パスワード",
+    "CONFIRM-PASSWORD": "パスワード確認",
+    "EMAIL": "メールアドレス",
+    "FIRST-NAME": "姓",
+    "LAST-NAME": "名",
+    "ROLE": "役割",
+    "STUDENT": "学生",
+    "TEACHER": "教師",
+    "HAVE_ACCOUNT": "すでにアカウントをお持ちですか？"
+  },
+  "CLASSROOM": {
+    "CREATE": "クラスを作成",
+    "NAME": "クラス名",
+    "DESCRIPTION": "クラスの説明",
+    "MY-CLASSROOMS": "私のクラス",
+    "JOIN-CLASSROOM": "クラスに参加",
+    "JOIN-CODE": "参加コードを入力",
+    "CREATED-BY": "作成者：",
+    "SUGGESTED": "おすすめのクラス",
+    "JOIN": "参加する"
+  },
+  "CLASSROOM-DETAILS": {
+    "BACK": "戻る",
+    "LEAVE": "クラスを退会",
+    "DELETE": "クラスを削除",
+    "INFO": "クラス情報",
+    "DESCRIPTION": "説明",
+    "CREATED-BY": "作成者：",
+    "JOIN-CODE": "参加コード",
+    "MEMBERS": "メンバー",
+    "STUDENTS": "学生",
+    "TEACHERS": "教師",
+    "MORE": "もっと見る",
+    "WANT-TO-SHARE": "何か共有したいことがありますか？",
+    "CANCEL": "キャンセル",
+    "POSTS": "クラスの投稿"
+  },
+  "CREATE-POST": {
+    "TITLE": "投稿タイトル",
+    "CONTENT": "どんな内容を共有しますか？",
+    "SUBMIT": "投稿する"
+  },
+  "POST": {
+    "LIKE": "いいね",
+    "COMMENT": "コメント",
+    "SHARE": "共有"
+  },
+  "COMMENT": {
+    "MORE": "さらにコメントを見る",
+    "EDIT": "編集",
+    "DELETE": "削除"
+  },
+  "CHAT": {
+    "SEND": "送信",
+    "MESSAGE": "メッセージ",
+    "NO-MESSAGES": "メッセージがありません",
+    "SELECT-USER": "チャットする相手を選択",
+    "SEARCH": "ユーザーを検索"
+  },
+  "PROFILE": {
+    "DATE": "参加日",
+    "CHANGE-PROFILE": "プロフィールを更新",
+    "CHANGE-PASSWORD": "パスワードを変更",
+    "CANCEL": "キャンセル",
+    "SAVE": "保存",
+    "FIRST-NAME": "姓",
+    "LAST-NAME": "名",
+    "EMAIL": "メールアドレス",
+    "OLD-PASSWORD": "現在のパスワード",
+    "NEW-PASSWORD": "新しいパスワード",
+    "CONFIRM-PASSWORD": "新しいパスワードの確認"
+  },
+  "CALLBACK": {
+    "SUCCESS": "ログインに成功しました！",
+    "PROVIDER": "あなたは次の方法でログインしました：",
+    "PROCESSING": "ログインを処理中...",
+    "REDIRECTING": "間もなくリダイレクトされます。"
+  }
+}

@@ -2,7 +2,10 @@
   "HEADER": {
     "LANGUAGE": "Language",
     "VIETNAMESE": "Vietnamese",
+    "FRENCH": "French",
+    "CHINESE": "Chinese",
     "ENGLISH": "English",
+    "JAPANESE": "Japanese",
     "SIGN-OUT": "Sign Out",
     "SIGN-IN": "Sign In"
   },

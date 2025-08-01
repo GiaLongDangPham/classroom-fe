@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { UserResponse } from '../models/response/user.response';
 import { AuthService } from '../../core/services/auth.service';
 import { ApiResponse } from '../models/api.response';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   imports: [
-    RouterLink,
+    RouterModule,
     TranslateModule
   ],
   templateUrl: './sidebar.component.html',
